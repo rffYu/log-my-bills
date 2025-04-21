@@ -1,5 +1,6 @@
 import { configureStore, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RecordItem } from '../models/recordModel';
+import preloadedState from './init';
 
 const recordSlice = createSlice({
   name: 'record',
@@ -17,6 +18,7 @@ const store = configureStore({
   reducer: {
     record: recordSlice.reducer,
   },
+  preloadedState
 });
 
 export type RootState = ReturnType<typeof store.getState>;
