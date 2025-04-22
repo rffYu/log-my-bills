@@ -1,7 +1,8 @@
 export default defineAppConfig({
   pages: [
     'pages/index/index',
-    'pages/add/index'
+    'pages/add/index',
+    'pages/category/index',
   ],
   window: {
     backgroundTextStyle: 'light',
@@ -30,7 +31,7 @@ export default defineAppConfig({
         selectedIconPath: "../assets/icons/placeholder.png"
       },
       {
-        pagePath: "pages/settings/index",
+        pagePath: "pages/category/index",
         text: "Maybe",
         iconPath: "../assets/icons/placeholder.png",
         selectedIconPath: "../assets/icons/placeholder.png"
