@@ -1,16 +1,16 @@
 import { View, Input, Button } from '@tarojs/components';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { createRecord } from '../../controllers/recordController';
+import { useRecordViewModel } from '@/viewmodels/recordVM';
 
 const Add = () => {
   const [title, setTitle] = useState('');
   const [amount, setAmount] = useState('');
-  const dispatch = useDispatch();
+  const { createRecord } = useRecordViewModel();
 
   const handleAdd = () => {
     if (!title || !amount) return;
-    createRecord(dispatch, { title, amount: parseFloat(amount) });
+    createRecord({ title, amount: parseFloat(amount) });
   };
 
   return (
