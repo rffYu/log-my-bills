@@ -6,9 +6,11 @@ export const useRecordViewModel = () => {
   const dispatch = useDispatch();
   const records = useSelector((state: RootState) => state.record);
 
+  const maxId = () => records.length ? Math.max(...records.map(rec => rec.id)) : -1;
+
   const createRec = (data: Partial<RecordItem, 'id' | 'date' | 'categoryId' | 'title' | 'type'>) => {
     const d: RecordItem = {
-      id: Date.now(),
+      id: maxId()+1,
       date: data.date && data.date.trim() !== '' ? data.date : new Date().toLocaleDateString(),
       type: data.type && data.type.trim() !== '' ? data.type : '1',
       currency: data.currency && data.currency.trim() !== '' ? data.currency : 'cny',
@@ -30,10 +32,17 @@ export const useRecordViewModel = () => {
   const getRecById = (id: number): RecordItem | undefined =>
     records.find(tx => tx.id === id);
 
+  const getRecentRecs = (num: number): RecordItem | undefined => {
+    return [...records]
+      .sort((a, b) => b.date.localeCompare(a.date))
+      .slice(0, num);
+  };
+
   return {
     createRecord: createRec,
     updateRecord: updateRec,
     removeRecord: removeRec,
-    getRecordById: getRecById
+    getRecordById: getRecById,
+    getRecentRecords: getRecentRecs
   };
 }

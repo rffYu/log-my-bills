@@ -1,6 +1,8 @@
 import { View, Text, Picker } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import { useSelector } from 'react-redux';
+import { useDateRecordViewModel } from '@/viewmodels/dtRecVM';
+import { useRecordViewModel } from '@/viewmodels/recordVM';
 import './index.scss';
 import './card.scss';
 
@@ -8,11 +10,11 @@ const Card = ({ title, extra, note, children }: Props) => {
   return (
     <View className="custom-card">
       <View className="card-header">
-        <Text className="card-title">{title}</Text>
-        {extra && <Text className="card-extra">{extra}</Text>}
+        <Text className="card-title">{ title }</Text>
+        { extra && <Text className="card-extra">{ extra }</Text> }
       </View>
-      <View className="card-content">{children}</View>
-      {note && <Text className="card-note">{note}</Text>}
+      <View className="card-content">{ children }</View>
+      { note && <Text className="card-note">{ note }</Text> }
     </View>
   );
 };
@@ -22,15 +24,18 @@ const Index = () => {
   const currentMonth = new Date().toISOString().slice(0, 7);
   const allMonths = ['2025/04', '2025/03', '2025/02'];
 
+  const { getTotalByMonth, getTotalsGroupByDay } = useDateRecordViewModel();
+  const { getRecentRecords } = useRecordViewModel();
+
   return (
       <View className="index-page">
 
       {/* Top summary block */}
       <View className="summary-box">
         <Text className="section-title">本月总支出</Text>
-        <Text className="total-text">￥1234.56</Text>
-        <Picker mode="selector" range={allMonths}>
-          <Text className="month-text">当前月份：{currentMonth}</Text>
+        <Text className="total-text">{ `￥${getTotalByMonth(currentMonth)}` }</Text>
+        <Picker mode="selector" range={ allMonths }>
+          <Text className="month-text">当前月份：{ currentMonth }</Text>
         </Picker>
       </View>
 
@@ -43,12 +48,12 @@ const Index = () => {
       {/* Recent Records */}
       <View className="records-box">
         <Text className="section-title">最近记录</Text>
-        {[1, 2, 3].map(i => (
+        { getRecentRecords(3).map(i => (
           <Card
-            key={i}
-            title={`记录 ${i}`}
-            extra="￥88.88"
-            note="2025-04-22"
+            key={i.id}
+            title={ `记录 ${i.title}` }
+            extra={ `￥${i.amount}` }
+            note={ i.date }
           >
             分类：购物
           </Card>
@@ -58,12 +63,12 @@ const Index = () => {
       {/* Month Breakdown */}
       <View className="breakdown-box">
         <Text className="section-title">按日拆分</Text>
-        {[1, 2, 3].map(day => (
-          <View className="daily-summary" key={day}>
-            <Text>4月{day}日</Text>
-            <Text style={{ marginLeft: '12px' }}>￥{day * 100}</Text>
-          </View>
-        ))}
+          { Object.entries(getTotalsGroupByDay()).map(([day, total]) => (
+            <View className="daily-summary" key={ day }>
+              <Text>{ day }</Text>
+                <Text style={ { marginLeft: '12px' } }>￥{ total }</Text>
+              </View>
+          ))}
       </View>
     </View>
   );
