@@ -3,7 +3,8 @@ export default defineAppConfig({
     'pages/index/index',
     'pages/add/index',
     'pages/category/index',
-    'pages/month/index'
+    'pages/month/index',
+    'pages/pie'
   ],
   window: {
     backgroundTextStyle: 'light',
@@ -32,7 +33,7 @@ export default defineAppConfig({
         selectedIconPath: "../assets/icons/placeholder.png"
       },
       {
-        pagePath: "pages/category/index",
+        pagePath: "pages/pie",
         text: "Maybe",
         iconPath: "../assets/icons/placeholder.png",
         selectedIconPath: "../assets/icons/placeholder.png"
