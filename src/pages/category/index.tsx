@@ -1,8 +1,19 @@
 import * as echarts from 'echarts';
 import { useEffect, useRef } from 'react';
 import { Canvas } from '@tarojs/components';
+import React from 'react';
+import { View, Text } from '@tarojs/components';
+import './index.scss';
 
-export default function ChartView() {
+const categories = [
+  { name: 'Food', total: 1200 },
+  { name: 'Transport', total: 800 },
+  { name: 'Entertainment', total: 600 },
+  { name: 'Shopping', total: 400 },
+  { name: 'Healthcare', total: 300 }
+];
+
+const CategoryPage = () => {
   const canvasRef = useRef();
 
   useEffect(() => {
@@ -23,11 +34,32 @@ export default function ChartView() {
   }, []);
 
   return (
-    <Canvas
-      canvasId="chartCanvas"
-      style={{ width: '100%', height: '300px' }}
-      ref={canvasRef}
-    />
+    <View className="category-page-container">
+      <View className="header">
+        <Text className="header-title">Category Overview</Text>
+      </View>
+
+      <Canvas
+          canvasId="chartCanvas"
+          style={{ width: '100%', height: '300px' }}
+          ref={canvasRef}
+        />
+
+      <View className="category-list">
+        {categories.map((category, index) => (
+          <View className="category-item" key={index}>
+            <Text className="category-name">{category.name}</Text>
+            <Text className="category-total">Total: ￥{category.total}</Text>
+            {/* Placeholder for Pie Chart */}
+            <View className="category-chart">
+              [Pie Chart for {category.name}]
+            </View>
+          </View>
+        ))}
+      </View>
+    </View>
   );
-}
+};
+
+export default CategoryPage;
 

@@ -3,6 +3,7 @@ export default defineAppConfig({
     'pages/index/index',
     'pages/add/index',
     'pages/category/index',
+    'pages/month/index'
   ],
   window: {
     backgroundTextStyle: 'light',
@@ -19,14 +20,14 @@ export default defineAppConfig({
         selectedIconPath: "../assets/icons/placeholder.png"
       },
       {
-        pagePath: "pages/add/index",
-        text: "记一笔",
+        pagePath: "pages/month/index",
+        text: "月度帐单",
         iconPath: "../assets/icons/placeholder.png",
         selectedIconPath: "../assets/icons/placeholder.png"
       },
       {
-        pagePath: "pages/stats/index",
-        text: "stats",
+        pagePath: "pages/category/index",
+        text: "分类帐单",
         iconPath: "../assets/icons/placeholder.png",
         selectedIconPath: "../assets/icons/placeholder.png"
       },
