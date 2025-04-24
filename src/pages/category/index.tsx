@@ -1,8 +1,8 @@
-import * as echarts from 'echarts';
 import { useEffect, useRef } from 'react';
-import { Canvas } from '@tarojs/components';
-import React from 'react';
+import Taro from '@tarojs/taro';
 import { View, Text } from '@tarojs/components';
+import { useCategoryRecordViewModel } from '@/viewmodels/catRecVM';
+import BarChart from '@/components/D3BarChart';
 import './index.scss';
 
 const categories = [
@@ -14,36 +14,15 @@ const categories = [
 ];
 
 const CategoryPage = () => {
-  const canvasRef = useRef();
-
-  useEffect(() => {
-    const chart = echarts.init(canvasRef.current as any);
-    chart.setOption({
-      xAxis: {
-        type: 'category',
-        data: ['Food', 'Shopping', 'Transport']
-      },
-      yAxis: {
-        type: 'value'
-      },
-      series: [{
-        data: [120, 200, 150],
-        type: 'bar'
-      }]
-    });
-  }, []);
+  const systemInfo = Taro.getSystemInfoSync();
+  const windowWidth = systemInfo.windowWidth;
 
   return (
     <View className="category-page-container">
       <View className="header">
         <Text className="header-title">Category Overview</Text>
       </View>
-
-      <Canvas
-          canvasId="chartCanvas"
-          style={{ width: '100%', height: '300px' }}
-          ref={canvasRef}
-        />
+      <BarChart data={categories.map(d => ({x: d.name, y: d.total}))} width={windowWidth - 60} height={240} />
 
       <View className="category-list">
         {categories.map((category, index) => (
