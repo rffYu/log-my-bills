@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
+import { RecordItem } from '@/models/recordModel';
 
 interface CategoryTotal {
   catId: number;
@@ -21,6 +22,10 @@ export const useCategoryRecordViewModel = () => {
   const getExistingCats = (): [string, number][] => {
     const catIds = [...new Set(records.map(rec => rec.categoryId))];
     return catIds.map(id => [catMap[id] || 'Unknown', id]);
+  }
+
+  const getRecsByCat = (id: number): RecordItem[] => {
+    return records.filter((rec) => rec.categoryId === id);
   }
 
   const getTotalsGroupByCat = (id: number): CategoryTotal[] => {
@@ -46,7 +51,7 @@ export const useCategoryRecordViewModel = () => {
       .filter(rec => rec.categoryId === id)
       .reduce((sum, rec) => sum + Number(rec.amount), 0);
 
-    const catName = catMap[catId] || 'Unknown';
+    const catName = catMap[id] || 'Unknown';
     return {
       catId: id,
       catName,
@@ -56,6 +61,7 @@ export const useCategoryRecordViewModel = () => {
 
   return {
     getExistingCategories: getExistingCats,
+    getRecordsByCategory: getRecsByCat,
     getTotalsGroupByCategory: getTotalsGroupByCat,
     getTotalByCategory: getTotalByCat,
   };
