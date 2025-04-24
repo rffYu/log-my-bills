@@ -1,16 +1,8 @@
 import { View, Text } from '@tarojs/components';
-import { useRecordViewModel } from '@/viewmodels/recordVM';
 import { useState } from 'react';
+import { useRecordViewModel } from '@/viewmodels/recordVM';
+import AddRecordDrawer from '@/components/AddRecordDrawer';
 import './AddRecordDrawer.scss';
-
-const AddRecordDrawer = ({ visible, onClose, onSubmit }) => {
-  if (!visible) return null;
-
-  return (
-    <View className="add-record-drawer">
-      <Text>DRAWER</Text>
-    </View>);
-};
 
 const GlobalContainer = () => {
   const [drawerVisible, setDrawerVisible] = useState(false);
