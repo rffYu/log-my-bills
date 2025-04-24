@@ -1,7 +1,6 @@
 import { View, Text, Input, Button, Picker } from '@tarojs/components';
 import { useState } from 'react';
 import RecordItem from '@/models/recordModel';
-import './AddRecordDrawer.scss';
 
 interface Props {
   visible: boolean;

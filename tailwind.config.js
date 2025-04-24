@@ -7,5 +7,8 @@ module.exports = {
     extend: {},
   },
   plugins: [],
+  corePlugins: {
+    preflight: false, // if preflight breaks native tag styling
+  }
 }
 
