@@ -28,7 +28,8 @@
     "dev:qq": "npm run build:qq -- --watch",
     "dev:jd": "npm run build:jd -- --watch",
     "dev:harmony-hybrid": "npm run build:harmony-hybrid -- --watch",
-    "inject:mock": "node scripts/injectMock.js"
+    "inject:mock": "node scripts/injectMock.js",
+    "postinstall": "weapp-tw patch"
   },
   "browserslist": {
     "development": [
@@ -72,6 +73,7 @@
     "@babel/plugin-transform-class-properties": "7.25.9",
     "@babel/preset-react": "7.26.3",
     "@pmmmwh/react-refresh-webpack-plugin": "0.5.16",
+    "@tailwindcss/postcss": "4.1.4",
     "@tarojs/cli": "4.0.12",
     "@tarojs/taro-loader": "4.0.12",
     "@tarojs/webpack5-runner": "4.0.12",
@@ -87,8 +89,10 @@
     "react-refresh": "0.14.2",
     "sass": "1.86.3",
     "stylelint": "16.18.0",
+    "tailwindcss": "4.1.4",
     "tsconfig-paths-webpack-plugin": "4.2.0",
     "typescript": "5.8.3",
+    "weapp-tailwindcss": "4.1.5",
     "webpack": "5.91.0"
   }
 }

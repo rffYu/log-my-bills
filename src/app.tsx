@@ -3,7 +3,7 @@ import { Provider } from 'react-redux'
 import GlobalContainer from './components/GlobalContainer';
 import store from './store'
 import './app.scss'
-
+import './tailwind.css'
 
 class App extends Component<PropsWithChildren> {
   componentDidMount () {}
