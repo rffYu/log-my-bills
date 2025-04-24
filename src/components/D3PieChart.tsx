@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
-import { View, Canvas } from '@tarojs/components';
 import Taro, { useReady, useDidShow } from '@tarojs/taro';
+import { View, Canvas } from '@tarojs/components';
 import * as d3 from 'd3';
 
 interface DataItem {
@@ -10,13 +10,17 @@ interface DataItem {
 
 interface PieChartProps {
   data: DataItem[];
+  width?: number;
+  height?: number;
   outerRadius?: number;
   innerRadius?: number;
   canvasId?: string;
 }
 
-const PieChart = ({
+const PieChart: React.FC<Props> = ({
   data,
+  width = 300,
+  height = 300,
   outerRadius = 100,
   innerRadius = 0,
   canvasId = 'pieCanvas'
@@ -89,13 +93,13 @@ const PieChart = ({
           type='2d'
           id={canvasId}
           canvasId={canvasId}
-          style={{ width: '300px', height: '300px' }}
+          style={{ width: `${width}px`, height: `${height}px` }}
         />
       ) : (
         <canvas
           ref={canvasRef}
           id={canvasId}
-          style={{ width: '300px', height: '300px' }}
+          style={{ width: `${width}px`, height: `${height}px` }}
         />
       )}
     </View>
