@@ -24,7 +24,7 @@ export const useCategoryRecordViewModel = () => {
     return catIds.map(id => [catMap[id] || 'Unknown', id]);
   }
 
-  const getRecsByCat = (id: number): RecordItem[] => {
+  const getRecsByCat = (id: number): RecordItem[] | undefined => {
     return records.filter((rec) => rec.categoryId === id);
   }
 

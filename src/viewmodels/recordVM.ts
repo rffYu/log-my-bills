@@ -29,10 +29,11 @@ export const useRecordViewModel = () => {
     dispatch(deleteRecord(id));
   };
 
-  const getRecById = (id: number): RecordItem | undefined =>
-    records.find(tx => tx.id === id);
+  const getRecById = (id: number): RecordItem | undefined => {
+    return records.find(tx => tx.id === id);
+  }
 
-  const getRecentRecs = (num: number): RecordItem | undefined => {
+  const getRecentRecs = (num: number): RecordItem[] | undefined => {
     return [...records]
       .sort((a, b) => b.date.localeCompare(a.date))
       .slice(0, num);
