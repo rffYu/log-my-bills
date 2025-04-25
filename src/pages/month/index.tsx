@@ -1,6 +1,7 @@
 import { View, Text, ScrollView, Picker } from '@tarojs/components';
 import { useDateRecordViewModel } from '@/viewmodels/dtRecVM';
 import CalendarHeatMap from '@/components/D3CalendarHeatMap';
+import GlobalContainer from '@/components/GlobalContainer';
 import './index.scss';
 
 const dummyHeatmapData = [
@@ -49,6 +50,8 @@ const MonthlySummaryPage = () => {
           </View>
         ))}
       </View>
+
+      <GlobalContainer/>
     </ScrollView>
   );
 }

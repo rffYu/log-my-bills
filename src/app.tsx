@@ -1,6 +1,5 @@
 import { Component, PropsWithChildren } from 'react'
 import { Provider } from 'react-redux'
-import GlobalContainer from './components/GlobalContainer';
 import store from './store'
 import './app.scss'
 import './tailwind.css'
@@ -17,10 +16,7 @@ class App extends Component<PropsWithChildren> {
   render () {
     return (
       <Provider store={store}>
-        <>
-          {this.props.children}
-          <GlobalContainer />
-        </>
+        {this.props.children}
       </Provider>
     )
   }

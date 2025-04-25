@@ -4,6 +4,7 @@ import { View, Text } from '@tarojs/components';
 import { useCategoryRecordViewModel } from '@/viewmodels/catRecVM';
 import BarChart from '@/components/D3BarChart';
 import PieChart from '@/components/D3PieChart';
+import GlobalContainer from '@/components/GlobalContainer';
 import './index.scss';
 
 const CatBreakDown = ({ catId }) => {
@@ -64,6 +65,8 @@ const CategoryPage = () => {
           </View>
         ))}
       </View>
+
+      <GlobalContainer />
     </View>
   );
 };

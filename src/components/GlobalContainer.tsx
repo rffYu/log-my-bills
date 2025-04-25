@@ -1,4 +1,4 @@
-import { View, Text, CoverView, CoverText } from '@tarojs/components';
+import { View, Text, CoverView } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import { useState } from 'react';
 import { useRecordViewModel } from '@/viewmodels/recordVM';
@@ -42,9 +42,9 @@ const GlobalContainer = () => {
           }}
           onClick={handleClick}
         >
-            <CoverText className="text-white text-xl">
-              <PlusSVG/>
-            </CoverText>
+            <CoverView className="text-white text-xl">
+              +
+            </CoverView>
           </CoverView>
       ) : (
           // 👇 Use normal View on H5
