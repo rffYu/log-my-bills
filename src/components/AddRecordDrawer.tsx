@@ -1,6 +1,7 @@
-import { View, Text, Input, Button, Picker } from '@tarojs/components';
+import { ScrollView, View, Text, Input, Button, Picker } from '@tarojs/components';
 import { useState } from 'react';
 import RecordItem from '@/models/recordModel';
+import './AddRecordDrawer.scss';
 
 interface Props {
   visible: boolean;
@@ -16,21 +17,28 @@ const AddRecordDrawer = ({ visible, onClose, onSubmit }: Props) => {
   if (!visible) return null;
 
   return (
-    <View className="add-record-drawer">
-      <View className="drawer-content">
-        <Text>添加记录</Text>
-        <Input value={title} onInput={e => setTitle(e.detail.value)} placeholder="标题" />
-        <Input type="number" value={amount} onInput={e => setAmount(e.detail.value)} placeholder="金额" />
-        <Picker mode="selector" range={['吃饭', '交通']} onChange={e => setCategoryId(Number(e.detail.value))}>
-          <Text>选择分类</Text>
+    <View className="add-record-drawer fixed bottom-0 left-0 w-full bg-white p-4 rounded-t-2xl shadow-xl z-[999]">
+      <View className="drawer-content flex flex-col gap-4">
+        <Text className="text-lg font-bold">添加记录</Text>
+        <Input value={title} onInput={e => setTitle(e.detail.value)} placeholder="标题" className="border border-gray-300 p-2 rounded" />
+        <Input type="number" value={amount} onInput={e => setAmount(e.detail.value)} placeholder="金额" className="border border-gray-300 p-2 rounded" />
+
+        <Picker
+        mode="selector"
+        range={['吃饭', '交通']}
+        onChange={e => setCategoryId(Number(e.detail.value))}
+      >
+          <View className="border border-gray-300 p-2 rounded text-gray-600">选择分类</View>
         </Picker>
-        <Button onClick={() => {
+
+        <Button className="bg-blue-500 text-white rounded" onClick={() => {
           onSubmit({ title, amount: Number(amount), categoryId });
           onClose();
         }}>保存</Button>
-        <Button onClick={onClose}>取消</Button>
+
+        <Button className="bg-gray-300 text-black rounded" onClick={onClose}>取消</Button>
       </View>
-    </View>
+      </View>
   );
 };
 
