@@ -109,12 +109,17 @@ const IndexPage = () => {
       </View>
 
       {/* Month Breakdown */}
-      <View className="breakdown-box">
-        <Text className="section-title">按日拆分</Text>
-          { Object.entries(getTotalsGroupByDay()).map(([day, total]) => (
-            <View className="daily-summary" key={ day }>
-              <Text>{ day }</Text>
-                <Text style={ { marginLeft: '12px' } }>￥{ total }</Text>
+        <View className="breakdown-box">
+          <Text className="section-title">按日拆分</Text>
+          { getTotalsGroupByDay()?.map(({ date, value }, idx, arr) => (
+            <View
+              key={date}
+              className={`daily-summary flex justify-between py-2 border-b ${
+idx === arr.length - 1 ? 'border-b-0' : 'border-[#eee]'
+}`}
+            >
+                <Text>{date}</Text>
+                <Text>￥{value}</Text>
               </View>
           ))}
       </View>
