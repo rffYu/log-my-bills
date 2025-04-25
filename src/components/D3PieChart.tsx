@@ -28,10 +28,13 @@ const PieChart: React.FC<Props> = ({
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   const drawChart = (ctx: CanvasRenderingContext2D, width: number, height: number, dpr: number) => {
-    const arcs = d3.pie<DataItem>().value((d) => d.value).padAngle(0.01)(data);
+    const arcs = d3.pie<DataItem>()
+    .value((d) => d.value)
+    .padAngle(0.01)(data);
+
     const arcGen = d3.arc<d3.PieArcDatum<DataItem>>()
-      .innerRadius(innerRadius)
-      .outerRadius(outerRadius);
+    .innerRadius(innerRadius)
+    .outerRadius(outerRadius);
 
     ctx.save();
     ctx.clearRect(0, 0, width, height);
@@ -39,17 +42,53 @@ const PieChart: React.FC<Props> = ({
 
     arcs.forEach((arc, i) => {
       const path = arcGen(arc);
-      const p = new Path2D(path!);
-      ctx.fillStyle = d3.interpolateCool(i / data.length);
-      ctx.fill(p);
-      ctx.strokeStyle = '#fff';
-      ctx.stroke(p);
 
-      const [x, y] = arcGen.centroid(arc);
+      if (!path) return;
+
+      ctx.beginPath();
+
+      // Move to starting point
+      const startAngle = arc.startAngle;
+      const endAngle = arc.endAngle;
+
+      // Draw outer arc
+      ctx.moveTo(
+        Math.cos(startAngle) * outerRadius,
+        Math.sin(startAngle) * outerRadius
+      );
+      ctx.arc(0, 0, outerRadius, startAngle, endAngle);
+
+      // Draw inner arc (if donut)
+      if (innerRadius > 0) {
+        ctx.lineTo(
+          Math.cos(endAngle) * innerRadius,
+          Math.sin(endAngle) * innerRadius
+        );
+        ctx.arc(0, 0, innerRadius, endAngle, startAngle, true);
+      } else {
+        ctx.lineTo(0, 0);
+      }
+
+      ctx.closePath();
+
+      ctx.fillStyle = d3.interpolateCool(i / data.length);
+      ctx.fill();
+      ctx.strokeStyle = '#fff';
+      ctx.stroke();
+
+      // Draw label
+      const angle = (arc.startAngle + arc.endAngle) / 2;
+      const labelRadius = (innerRadius + outerRadius) / 2;
+      const x = Math.cos(angle) * labelRadius;
+      const y = Math.sin(angle) * labelRadius;
+
       ctx.fillStyle = '#fff';
       ctx.font = '10px sans-serif';
-      ctx.fillText(arc.data.label, x * 1.3, y * 1.3);
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(arc.data.label, x, y);
     });
+
     ctx.restore();
   };
 
@@ -76,8 +115,6 @@ const PieChart: React.FC<Props> = ({
       if (canvas) {
         const ctx = canvas.getContext('2d')!;
         const dpr = window.devicePixelRatio || 1;
-        const width = canvas.clientWidth;
-        const height = canvas.clientHeight;
         canvas.width = width * dpr;
         canvas.height = height * dpr;
         ctx.scale(dpr, dpr);
@@ -87,19 +124,23 @@ const PieChart: React.FC<Props> = ({
   });
 
   return (
-    <View>
+    <View className="flex justify-center items-center">
       {Taro.getEnv() === Taro.ENV_TYPE.WEAPP ? (
         <Canvas
           type='2d'
           id={canvasId}
           canvasId={canvasId}
           style={{ width: `${width}px`, height: `${height}px` }}
+          width={ width }
+          height={ height }
         />
       ) : (
         <canvas
           ref={canvasRef}
           id={canvasId}
           style={{ width: `${width}px`, height: `${height}px` }}
+          width={ width }
+          height={ height }
         />
       )}
     </View>
