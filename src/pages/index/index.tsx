@@ -7,19 +7,19 @@ import { useRecordViewModel } from '@/viewmodels/recordVM';
 import { useCategoryRecordViewModel } from '@/viewmodels/catRecVM';
 import PieChart from '@/components/D3PieChart';
 import GlobalContainer from '@/components/GlobalContainer';
-import './index.scss';
-import './card.scss';
+//import './index.scss';
+//import './card.scss';
 
 const Card = ({ title, extra, note, children }: Props) => {
   return (
-    <View className="custom-card">
-      <View className="card-header">
-        <Text className="card-title">{ title }</Text>
-        { extra && <Text className="card-extra">{ extra }</Text> }
+    <View className="custom-card bg-white p-4 mb-3 rounded-lg shadow-md">
+      <View className="card-header flex justify-between mb-2">
+        <Text className="card-title font-bold text-lg">{ title }</Text>
+        { extra && <Text className="card-extra text-red-500 font-medium">{ extra }</Text> }
       </View>
-      <View className="card-content">{ children }</View>
-      { note && <Text className="card-note">{ note }</Text> }
-    </View>
+        <View className="card-content text-gray-800 mb-2">{ children }</View>
+        { note && <Text className="card-note text-sm text-gray-500">{ note }</Text> }
+      </View>
   );
 };
 
@@ -30,38 +30,25 @@ const CatSummary = () => {
   const getColor = (index: number) =>
     d3.interpolateCool(index / totals.length); // same as chart
   return (
-    <View className="cat-summary flex-row gap-4 items-start" style={{
-      display: 'flex',
-      flexDirection: 'row',
-      gap: 16,
-      alignItems: 'flex-start'
-    }}>
-      <View className="cat-chart">
-        <PieChart
-        data={totals.map(item => ({
-          value: item.total,
-          label: item.catName
-        }))}
-        width={300}
-        height={300}
-      />
-      </View>
+    <View className="cat-summary flex flex-row gap-4 items-start">
+      <PieChart
+      data={totals.map(item => ({
+        value: item.total,
+        label: item.catName
+      }))}
+      width={300}
+      height={300}
+    />
 
-        <View className="flex-1" style={{ display: 'flex', flexDirection: 'column' }}>
-         {totals.map((item, index) => (
-          <View className="cat-item" key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: 8 }}>
+        <View className="flex flex-col flex-1">
+          {totals.map((item, index) => (
+            <View className="cat-item flex flex-row items-center mb-2" key={index}>
               <View
-              className="color-dot"
-              style={{
-                width: 12,
-                height: 12,
-                borderRadius: 6,
-                backgroundColor: getColor(index),
-                marginRight: 8
-              }} />
-            <Text>{item.catName}: ¥{item.total}</Text>
-          </View>
-        ))}
+              className="color-dot w-3 h-3 rounded-full mr-2"
+              style={{ backgroundColor: getColor(index) }} />
+                <Text>{item.catName}: ¥{item.total}</Text>
+              </View>
+          ))}
         </View>
       </View>
   );
@@ -76,37 +63,41 @@ const IndexPage = () => {
   const { getRecentRecords } = useRecordViewModel();
 
   return (
-      <View className="index-page">
+    <View className="index-page p-4 bg-[#fafafa] space-y-6">
 
-      {/* Top summary block */}
-      <View className="summary-box">
-        <Text className="section-title">本月总支出</Text>
-        <Text className="total-text">{ `￥${getTotalByMonth(currentMonth)}` }</Text>
-        <Picker mode="selector" range={ allMonths }>
-          <Text className="month-text">当前月份：{ currentMonth }</Text>
-        </Picker>
-      </View>
+      {/* Summary Block */}
+        <View className="summary-box bg-white rounded-xl p-5 text-center mb-5">
+          <Text className="section-title text-[18px] font-bold mb-2">本月总支出</Text>
+          <Text className="total-text text-[24px] text-[#ff6700] my-2">{`￥${getTotalByMonth(currentMonth)}`}</Text>
+          <Picker mode="selector" range={allMonths}>
+            <Text className="month-text text-[16px] text-[#666666]">当前月份：{currentMonth}</Text>
+          </Picker>
+        </View>
 
-      {/* Category Pie Chart */}
-      <View className="chart-box">
-        <Text className="section-title">分类支出图</Text>
-        <CatSummary/>
-      </View>
+        {/* Chart Block */}
+        <View className="chart-box bg-white rounded-xl p-4 mb-5">
+          <Text className="section-title text-[18px] font-bold mb-4">分类支出图</Text>
+          <CatSummary />
+          {/* Example fallback if empty */}
+          {/* <View className="dummy-chart h-[200px] bg-[#f0f0f0] rounded-lg flex items-center justify-center text-[#999]">
+      暂无数据
+    </View> */}
+        </View>
 
-      {/* Recent Records */}
-      <View className="records-box">
-        <Text className="section-title">最近记录</Text>
-        { getRecentRecords(3).map(i => (
-          <Card
-            key={i.id}
-            title={ `记录 ${i.title}` }
-            extra={ `￥${i.amount}` }
-            note={ i.date }
-          >
-            分类：购物
-          </Card>
-        ))}
-      </View>
+        {/* Records Block */}
+        <View className="records-box mb-5">
+          <Text className="section-title text-[18px] font-bold mb-4">最近记录</Text>
+          {getRecentRecords(3).map(i => (
+            <Card
+              key={i.id}
+              title={`记录 ${i.title}`}
+              extra={`￥${i.amount}`}
+              note={i.date}
+            >
+              分类：购物
+            </Card>
+          ))}
+        </View>
 
       {/* Month Breakdown */}
         <View className="breakdown-box">
