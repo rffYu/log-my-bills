@@ -7,29 +7,41 @@ import PieChart from '@/components/D3PieChart';
 import GlobalContainer from '@/components/GlobalContainer';
 import './index.scss';
 
-const CatBreakDown = ({ catId }) => {
+const CatBreakDown = ({ catId, idx }) => {
   const { getRecordsByCategory } = useCategoryRecordViewModel();
 
   const recs = getRecordsByCategory(catId);
 
   return (
-    <View className="flex flex-row gap-4 items-start">
+    <View
+      style={{
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        justifyContent: 'space-between',
+        height: '220px'
+      }} >
       {/* Pie Chart on the left */}
-      <View className="w-[100px]">
+      <View className="h-[170px]">
         <PieChart
           data={recs.map(d => ({
             value: d.amount,
             label: d.title ?? d.date,
           }))}
-          width={150}
-          height={150}
+          width={200}
+          height={200}
+          canvasId={`pie-canvas-${idx}`}
         />
       </View>
 
       {/* Text summary on the right */}
-      <View className="flex flex-col gap-2">
+      <View style={{
+          display: 'flex',
+          flexDirection: 'column',
+          size: 12
+        }}>
         {recs.map((d, idx) => (
-          <Text key={idx} className="text-sm text-gray-700">
+          <Text key={idx} >
             {d.title ?? d.date}: ￥{d.amount}
           </Text>
         ))}
@@ -60,7 +72,7 @@ const CategoryPage = () => {
             <Text className="category-name">{ cat }</Text>
             <Text className="category-total">Total: ￥{ (getTotalByCategory(id))?.total ?? 0 }</Text>
             <View className="category-chart">
-              <CatBreakDown catId={ id } />
+              <CatBreakDown catId={ id } idx={ index }/>
             </View>
           </View>
         ))}

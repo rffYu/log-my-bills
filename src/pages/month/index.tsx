@@ -44,9 +44,6 @@ const MonthlySummaryPage = () => {
               <Text className="amount">{ total }</Text>
               <Text className="note">📝 { count } 条记录</Text>
             </View>
-            <View className="category-chart">
-              [Pie Chart for { date }]
-            </View>
           </View>
         ))}
       </View>
