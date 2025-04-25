@@ -39,7 +39,7 @@ const CatSummary = () => {
       <View className="cat-chart">
         <PieChart
         data={totals.map(item => ({
-          value: item.total,
+          value: Math.abs(item.total),
           label: item.catName
         }))}
         width={300}

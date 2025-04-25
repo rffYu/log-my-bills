@@ -58,7 +58,7 @@ export const useDateRecordViewModel = () => {
 
   const getTotalByMonth = (month: string): number => {
     const recs = getRecsByMonth(month);
-    return recs?.reduce((sum, rec) => sum + Number(rec.amount), 0) || 0;
+    return recs?.reduce((sum, rec) => sum + Number(rec.amount) * Number(rec.type || 1), 0) || 0;
   };
 
   const getTotalsGroupByDay = (): DateTotal[] => {
@@ -66,7 +66,7 @@ export const useDateRecordViewModel = () => {
 
     return dtRecs.map(({ date, recs }) => ({
       date,
-      value: recs?.reduce((acc, rec) => acc + Number(rec.amount), 0) || 0
+      value: recs?.reduce((acc, rec) => acc + Number(rec.amount) * Number(rec.type || 1), 0) || 0
     }));
   };
 
@@ -75,7 +75,7 @@ export const useDateRecordViewModel = () => {
     const filtered = dtRecs.filter(({ date }) => date.startsWith(month));
     return filtered.map(({date, recs}) => ({
       date,
-      value: recs?.reduce((acc, rec) => acc + Number(rec.amount), 0) || 0
+      value: recs?.reduce((acc, rec) => acc + Number(rec.amount) * Number(rec.type || 1), 0) || 0
     }));
   };
 
@@ -84,7 +84,7 @@ export const useDateRecordViewModel = () => {
 
     return dtRecs.map(({ date, recs }) => ({
       date,
-      total: recs?.reduce((sum, rec) => sum + Number(rec.amount), 0) || 0,
+      total: recs?.reduce((sum, rec) => sum + Number(rec.amount) * Number(rec.type || 1), 0) || 0,
       count: recs?.length || 0,
     }));
   }

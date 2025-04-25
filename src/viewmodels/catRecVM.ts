@@ -32,7 +32,7 @@ export const useCategoryRecordViewModel = () => {
     const totalsMap: Record<number, number> = {};
 
     records.forEach(rec => {
-      totalsMap[rec.categoryId] = (totalsMap[rec.categoryId] || 0) + Number(rec.amount);
+      totalsMap[rec.categoryId] = (totalsMap[rec.categoryId] || 0) + Number(rec.amount) * Number(rec.type || 1);
     });
 
     return Object.entries(totalsMap).map(([categoryIdStr, total]) => {
@@ -49,7 +49,7 @@ export const useCategoryRecordViewModel = () => {
   const getTotalByCat = (id: number): CategoryTotal => {
     const total = records
       .filter(rec => rec.categoryId === id)
-      .reduce((sum, rec) => sum + Number(rec.amount), 0);
+      .reduce((sum, rec) => sum + Number(rec.amount) * Number(rec.type || 1), 0);
 
     const catName = catMap[id] || 'Unknown';
     return {
