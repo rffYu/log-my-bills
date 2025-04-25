@@ -15,14 +15,14 @@ const CatBreakDown = ({ catId }) => {
   return (
     <View className="flex flex-row gap-4 items-start">
       {/* Pie Chart on the left */}
-      <View className="w-[300px]">
+      <View className="w-[100px]">
         <PieChart
           data={recs.map(d => ({
             value: d.amount,
             label: d.title ?? d.date,
           }))}
-          width={300}
-          height={300}
+          width={150}
+          height={150}
         />
       </View>
 
