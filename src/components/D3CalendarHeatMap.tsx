@@ -9,10 +9,22 @@ interface CalendarHeatmapProps {
   month: string; // format: '2025-04'
   data: DayValue[]; // array of { date: 'YYYY-MM-DD', value: number }
   width?: number;
-  height?: number;
 }
 
-const CalendarHeatmap: React.FC<CalendarHeatmapProps> = ({ month, data, width = 600, height = 150 }) => {
+const calculateHeight = (month, width) => {
+    const [year, mon] = month.split('-').map(Number);
+    const startOfMonth = new Date(year, mon - 1, 1);
+    const endOfMonth = new Date(year, mon, 0); // last day of month
+    const daysInMonth = endOfMonth.getDate();
+
+    const firstDayOfWeek = startOfMonth.getDay(); // 0 (Sun) - 6 (Sat)
+    const weeks = Math.ceil((daysInMonth + firstDayOfWeek) / 7);
+
+    const labelHeight = 16;
+    return (width / 7) * weeks + labelHeight + 16;
+};
+
+const CalendarHeatmap: React.FC<CalendarHeatmapProps> = ({ month, data, width = 400}) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const canvasId = 'calendar-chart';
 
@@ -29,12 +41,15 @@ const CalendarHeatmap: React.FC<CalendarHeatmapProps> = ({ month, data, width = 
     const firstDayOfWeek = startOfMonth.getDay(); // 0 (Sun) - 6 (Sat)
     const weeks = Math.ceil((daysInMonth + firstDayOfWeek) / 7);
 
+    const labelHeight = 16;
+    const computedHeight = (width / 7) * weeks + labelHeight + 16;
+
     // Calculate cell sizes
     const cellPadding = 4;
     const cellSize =
     Math.min(
       Math.floor((width - cellPadding * 6) / 7),
-      Math.floor((height - cellPadding * (weeks - 1)) / weeks)
+      Math.floor((computedHeight - cellPadding * (weeks - 1)) / weeks)
     );
 
     // Build a map for quick lookup
@@ -42,11 +57,10 @@ const CalendarHeatmap: React.FC<CalendarHeatmapProps> = ({ month, data, width = 
     const maxValue = Math.max(...data.map((d) => d.value), 1);
 
     const dayLabels = ['日', '一', '二', '三', '四', '五', '六'];
-    const labelHeight = 16;
 
     // Drawing
     if (ctx.save) ctx.save();
-    if (ctx.clearRect) ctx.clearRect(0, 0, width, height);
+    if (ctx.clearRect) ctx.clearRect(0, 0, width, computedHeight);
     if (ctx.translate) ctx.translate(0, 0);
 
     // Draw day labels
@@ -107,36 +121,55 @@ const CalendarHeatmap: React.FC<CalendarHeatmapProps> = ({ month, data, width = 
   useEffect(() => {
     const env = Taro.getEnv();
 
-    if (env === Taro.ENV_TYPE.WEAPP) {
-      const ctx = wx.createCanvasContext(canvasId, this as any);
-      drawCalendar(ctx, month, data);
+    if (env === Taro.ENV_TYPE.WEAPP || env === Taro.ENV_TYPE.ALIPAY) {
+      const query = Taro.createSelectorQuery();
+      query
+        .select(`#${canvasId}`)
+        .fields({ node: true, size: true })
+        .exec((res) => {
+          const canvas = res[0].node;
+          const ctx = canvas.getContext('2d');
+          const dpr = Taro.getSystemInfoSync().pixelRatio || 1;
+          const height = calculateHeight(month, width);
+          canvas.width = res[0].width * dpr;
+          canvas.height = height * dpr;
+          ctx.scale(dpr, dpr);
+
+          drawCalendar(ctx, month, data);
+        });
     } else if (env === Taro.ENV_TYPE.WEB) {
-      const canvas = document.getElementById(canvasId) as HTMLCanvasElement;
+      const canvas = canvasRef.current;
       if (canvas) {
         const ctx = canvas.getContext('2d');
+        const dpr = window.devicePixelRatio || 1;
+        const height = calculateHeight(month, width);
+        canvas.width = width * dpr;
+        canvas.height = height * dpr;
+        ctx.scale(dpr, dpr);
+
         if (ctx) drawCalendar(ctx, month, data);
       }
     }
-  }, [month, data]);
+  }, [month, data, width]);
 
   return (
-    <View className="p-4">
-      {Taro.getEnv() === Taro.ENV_TYPE.WEB ? (
+    Taro.getEnv() === Taro.ENV_TYPE.WEAPP ? (
+      <Canvas
+        canvasId={canvasId}
+        id={canvasId}
+        style={`width: ${width}px; height: ${calculateHeight(month, width)}px; background-color: #f9f9f9;`}
+      />
+    ) : (
         <canvas
           ref={canvasRef}
           id={canvasId}
-          width={320}
-          height={180}
-          style={{ backgroundColor: '#f9f9f9', width: '100%' }}
+          style={{
+            backgroundColor: '#f9f9f9',
+            width: `${width}px`,
+            height: `${calculateHeight(month, width)}px`
+          }}
         />
-      ) : (
-          <Canvas
-            canvasId={canvasId}
-            id={canvasId}
-            style={`width: ${width}px; height: ${height}px; background-color: #f9f9f9;`}
-          />
-        )}
-      </View>
+      )
   );
 };
 
