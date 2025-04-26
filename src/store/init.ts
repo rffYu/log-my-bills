@@ -1,7 +1,7 @@
 // store/init.ts
 let preloadedState = {};
 
-if (process.env.NODE_ENV === 'development') {
+if (true) {
   try {
     const mock = require('../../.runtime-mock.json');
     preloadedState = mock;
