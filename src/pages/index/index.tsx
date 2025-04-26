@@ -27,6 +27,8 @@ const CatSummary = () => {
   const { getTotalsGroupByCategory } = useCategoryRecordViewModel();
   const totals = getTotalsGroupByCategory() ?? [];
 
+  const windowWidth = Taro.getSystemInfoSync().windowWidth;
+  const pieWidth = windowWidth * 0.67
   const getColor = (index: number) =>
     d3.interpolateCool(index / totals.length); // same as chart
   return (
@@ -42,8 +44,8 @@ const CatSummary = () => {
           value: item.total,
           label: item.catName
         }))}
-        width={300}
-        height={300}
+        width={pieWidth}
+        height={pieWidth}
       />
       </View>
 
@@ -76,52 +78,56 @@ const IndexPage = () => {
   const { getRecentRecords } = useRecordViewModel();
 
   return (
-      <View className="index-page">
+      <View className="index-page p-4 space-y-6 bg-gray-50 min-h-screen">
 
       {/* Top summary block */}
-      <View className="summary-box">
-        <Text className="section-title">本月总支出</Text>
-        <Text className="total-text">{ `￥${getTotalByMonth(currentMonth)}` }</Text>
+      <View className="summary-box p-4 rounded-2xl bg-white shadow">
+        <Text className="section-title text-xl font-semibold mb-2 text-gray-800">本月总支出</Text>
+        <Text className="total-text text-3xl font-bold text-rose-500">{ `￥${getTotalByMonth(currentMonth)}` }</Text>
         <Picker mode="selector" range={ allMonths }>
-          <Text className="month-text">当前月份：{ currentMonth }</Text>
+          <Text className="month-text text-sm text-gray-500 mt-2">当前月份：{ currentMonth }</Text>
         </Picker>
       </View>
 
       {/* Category Pie Chart */}
-      <View className="chart-box">
-        <Text className="section-title">分类支出图</Text>
+      <View className="chart-box p-4 rounded-2xl bg-white shadow">
+        <Text className="section-title text-xl font-semibold mb-2 text-gray-800">分类支出图</Text>
         <CatSummary/>
       </View>
 
       {/* Recent Records */}
-      <View className="records-box">
-        <Text className="section-title">最近记录</Text>
-        { getRecentRecords(3).map(i => (
-          <Card
-            key={i.id}
-            title={ `记录 ${i.title}` }
-            extra={ `￥${i.amount}` }
-            note={ i.date }
-          >
-            分类：购物
-          </Card>
-        ))}
+      <View className="records-box p4 p-4 rounded-2xl bg-white shadow">
+        <Text className="section-title text-xl font-semibold mb-2 text-gray-800">最近记录</Text>
+          <View className="space-y-3">
+            { getRecentRecords(3).map(i => (
+              <Card
+                key={i.id}
+                title={ `记录 ${i.title}` }
+                extra={ `￥${i.amount}` }
+                note={ i.date }
+              >
+                分类：购物
+              </Card>
+            ))}
+          </View>
       </View>
 
       {/* Month Breakdown */}
-        <View className="breakdown-box">
-          <Text className="section-title">按日拆分</Text>
-          { getTotalsGroupByDay()?.map(({ date, value }, idx, arr) => (
-            <View
-              key={date}
-              className={`daily-summary flex justify-between py-2 border-b ${
+        <View className="breakdown-box p-4 rounded-2xl bg-white shadow">
+          <Text className="section-title text-xl font-semibold mb-2 text-gray-800">按日拆分</Text>
+          <View className="space-y-2">
+            { getTotalsGroupByDay()?.map(({ date, value }, idx, arr) => (
+              <View
+                key={date}
+                className={`daily-summary flex justify-between py-2 border-b ${
 idx === arr.length - 1 ? 'border-b-0' : 'border-[#eee]'
 }`}
-            >
-                <Text>{date}</Text>
-                <Text>￥{value}</Text>
-              </View>
-          ))}
+              >
+                  <Text className="text-gray-700">{date}</Text>
+                  <Text className="font-semibold text-gray-900">￥{value}</Text>
+                </View>
+            ))}
+          </View>
       </View>
 
       <GlobalContainer />
