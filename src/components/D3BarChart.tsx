@@ -12,11 +12,11 @@ interface Props {
   data: DataItem[];
   width?: number;
   height?: number;
+  canvasId?: string;
 }
 
-const BarChart: React.FC<Props> = ({ data, width = 300, height = 200 }) => {
+const BarChart: React.FC<Props> = ({ data, width = 300, height = 200, canvasId = 'bar-canvas' }) => {
   const canvasRef = useRef(null);
-  const canvasId = 'bar-canvas';
 
   useEffect(() => {
     const env = Taro.getEnv();
