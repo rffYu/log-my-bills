@@ -1,10 +1,8 @@
 export default defineAppConfig({
   pages: [
     'pages/index/index',
-    'pages/add/index',
     'pages/category/index',
     'pages/month/index',
-    'pages/pie'
   ],
   window: {
     backgroundTextStyle: 'light',
@@ -32,12 +30,6 @@ export default defineAppConfig({
         iconPath: "assets/icons/placeholder.png",
         selectedIconPath: "assets/icons/placeholder.png"
       },
-      {
-        pagePath: "pages/pie",
-        text: "Maybe",
-        iconPath: "assets/icons/placeholder.png",
-        selectedIconPath: "assets/icons/placeholder.png"
-      }
     ],
     selectedColor: "#FF9C00",
     backgroundColor: "#ffffff",
