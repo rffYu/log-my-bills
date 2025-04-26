@@ -32,6 +32,7 @@ const CatBreakDown = ({ catId, idx }) => {
           width={windowWidth * 0.6}
           height={170}
           canvasId={`bar-canvas-${idx}`}
+          color='#2b7fff'
         />
         </View>
 

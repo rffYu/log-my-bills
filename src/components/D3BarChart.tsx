@@ -13,9 +13,10 @@ interface Props {
   width?: number;
   height?: number;
   canvasId?: string;
+  color?: string
 }
 
-const BarChart: React.FC<Props> = ({ data, width = 300, height = 200, canvasId = 'bar-canvas' }) => {
+const BarChart: React.FC<Props> = ({ data, width = 300, height = 200, canvasId = 'bar-canvas', color = ''}) => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -32,7 +33,7 @@ const BarChart: React.FC<Props> = ({ data, width = 300, height = 200, canvasId =
           canvas.width = res[0].width * dpr;
           canvas.height = res[0].height * dpr;
           ctx.scale(dpr, dpr);
-          drawChart(ctx, res[0].width, res[0].height);
+          drawChart(ctx, res[0].width, res[0].height, color);
         });
     } else {
       const canvas = canvasRef.current;
@@ -42,12 +43,12 @@ const BarChart: React.FC<Props> = ({ data, width = 300, height = 200, canvasId =
         canvas.width = width * dpr;
         canvas.height = height * dpr;
         ctx.scale(dpr, dpr);
-        drawChart(ctx, width, height);
+        drawChart(ctx, width, height, color);
       }
     }
   }, [data]);
 
-  const drawChart = (ctx: CanvasRenderingContext2D, w: number, h: number) => {
+  const drawChart = (ctx: CanvasRenderingContext2D, w: number, h: number, color: string='') => {
     const margin = { top: 20, right: 20, bottom: 30, left: 40 };
     const innerWidth = w - margin.left - margin.right;
     const innerHeight = h - margin.top - margin.bottom;
@@ -65,7 +66,11 @@ const BarChart: React.FC<Props> = ({ data, width = 300, height = 200, canvasId =
       const x = xScale(d.x) || 0;
       const y = yScale(d.y);
       const barHeight = innerHeight - y;
-      ctx.fillStyle = d3.interpolateCool(i / data.length);
+      if (color) {
+        ctx.fillStyle = color;
+      } else {
+        ctx.fillStyle = d3.interpolateCool(i / data.length);
+      }
       ctx.fillRect(x, y, xScale.bandwidth(), barHeight);
     });
 
@@ -108,13 +113,11 @@ const BarChart: React.FC<Props> = ({ data, width = 300, height = 200, canvasId =
   };
 
   return (
-    <View>
-      {Taro.getEnv() === Taro.ENV_TYPE.WEAPP ? (
-        <Canvas type="2d" id={canvasId} canvasId={canvasId} style={{ width: `${width}px`, height: `${height}px` }} />
-      ) : (
+    Taro.getEnv() === Taro.ENV_TYPE.WEAPP ? (
+      <Canvas type="2d" id={canvasId} canvasId={canvasId} style={{ width: `${width}px`, height: `${height}px` }} />
+    ) : (
         <canvas ref={canvasRef} id={canvasId} style={{ width: `${width}px`, height: `${height}px` }} />
-      )}
-    </View>
+      )
   );
 };
 
