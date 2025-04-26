@@ -155,6 +155,7 @@ const CalendarHeatmap: React.FC<CalendarHeatmapProps> = ({ month, data, width = 
   return (
     Taro.getEnv() === Taro.ENV_TYPE.WEAPP ? (
       <Canvas
+        type='2d'
         canvasId={canvasId}
         id={canvasId}
         style={`width: ${width}px; height: ${calculateHeight(month, width)}px; background-color: #f9f9f9;`}
