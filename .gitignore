@@ -141,3 +141,4 @@ dist
 .swc/
 mock/
 .runtime-mock.json
+src/assets
