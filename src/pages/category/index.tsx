@@ -77,7 +77,7 @@ const CategoryPage = () => {
           <View className="category-item rounded-xl p-4 shadow-sm bg-white" key={index}>
               <View className="flex flex-row py-4 justify-between items-center mb-4">
                 <Text className="category-name text-lg font-semibold text-gray-700">{ cat }</Text>
-                <Text className="category-total text-base text-green-600">Total: ￥{ (getTotalByCategory(id))?.total ?? 0 }</Text>
+                <Text className="category-total text-base text-green-600">合计: ￥{ (getTotalByCategory(id))?.total ?? 0 }</Text>
               </View>
             <View className="category-chart mt-4">
               <CatBreakDown catId={ id } idx={ index }/>

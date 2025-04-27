@@ -24,11 +24,14 @@ const MonthlySummaryPage = () => {
 
   return (
     <ScrollView scrollY className="page-container">
-      <View className="header">
+      <View className="header flex flex-col p-4 rounded-xl bg-white shadow">
+        <View>
+          <Text className="section-title text-xl font-semibold mb-2 text-gray-800">本月总支出</Text>
+          <Text className="total-text text-xl font-bold text-rose-500">{ `￥${getTotalByMonth(currentMonth)}` }</Text>
+        </View>
         <Picker mode="selector" range={ allMonths }>
-          <Text className="month-text">当前月份：{ currentMonth }</Text>
+          <Text className="month-text text-sm text-gray-500 mt-2">当前月份：{ currentMonth }</Text>
         </Picker>
-        <Text className="monthly-total">￥{ getTotalByMonth(currentMonth) }</Text>
       </View>
 
       <View className="section">

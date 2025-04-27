@@ -1,4 +1,4 @@
-import { View, Text, Picker } from '@tarojs/components';
+import { View, Text } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import { useSelector } from 'react-redux';
 import * as d3 from 'd3';
@@ -82,11 +82,11 @@ const IndexPage = () => {
 
       {/* Top summary block */}
       <View className="summary-box p-4 rounded-2xl bg-white shadow">
-        <Text className="section-title text-xl font-semibold mb-2 text-gray-800">本月总支出</Text>
-        <Text className="total-text text-3xl font-bold text-rose-500">{ `￥${getTotalByMonth(currentMonth)}` }</Text>
-        <Picker mode="selector" range={ allMonths }>
-          <Text className="month-text text-sm text-gray-500 mt-2">当前月份：{ currentMonth }</Text>
-        </Picker>
+        <View>
+          <Text className="section-title text-xl font-semibold mb-2 text-gray-800">本月总支出</Text>
+          <Text className="total-text text-3xl font-bold text-rose-500">{ `￥${getTotalByMonth(currentMonth)}` }</Text>
+        </View>
+        <Text className="month-text text-sm text-gray-500 mt-2">当前月份：{ currentMonth }</Text>
       </View>
 
       {/* Category Pie Chart */}
