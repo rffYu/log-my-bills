@@ -1,0 +1,26 @@
+{
+  "record": [
+    { "id": 1, "amount": 100, "type": -1, "categoryId": 1, "date": "2025-04-20", "note": "Mock Lunch" },
+    { "id": 2, "amount": 60,  "type": -1, "categoryId": 2, "date": "2025-04-21", "note": "Taxi ride" },
+    { "id": 3, "amount": 200, "type": -1, "categoryId": 3, "date": "2025-04-21", "note": "Groceries" },
+    { "id": 4, "amount": 300, "type": 1,  "categoryId": 4, "date": "2025-04-22", "note": "Salary" },
+    { "id": 5, "amount": 120, "type": -1, "categoryId": 1, "date": "2025-04-22", "note": "Dinner" },
+    { "id": 6, "amount": 80,  "type": -1, "categoryId": 2, "date": "2025-04-23", "note": "Bus fare" },
+    { "id": 7, "amount": 150, "type": -1, "categoryId": 3, "date": "2025-04-23", "note": "Market snacks" },
+    { "id": 8, "amount": 1000,"type": 1,  "categoryId": 4, "date": "2025-04-24", "note": "Freelance" },
+    { "id": 9, "amount": 75,  "type": -1, "categoryId": 1, "date": "2025-04-24", "note": "Breakfast" },
+    { "id": 10,"amount": 40,  "type": -1, "categoryId": 2, "date": "2025-04-24", "note": "Subway" },
+    { "id": 11,"amount": 180, "type": -1, "categoryId": 3, "date": "2025-04-24", "note": "Supermarket" },
+    { "id": 12,"amount": 1200,"type": 1,  "categoryId": 4, "date": "2025-04-24", "note": "Bonus" },
+    { "id": 13,"amount": 90,  "type": -1, "categoryId": 1, "date": "2025-04-24", "note": "Lunch again" },
+    { "id": 14,"amount": 55,  "type": -1, "categoryId": 2, "date": "2025-04-24", "note": "Bike rental" },
+    { "id": 15,"amount": 250, "type": -1, "categoryId": 3, "date": "2025-04-24", "note": "Food delivery" }
+  ],
+  "category": [
+    { "id": 1, "name": "吃" },
+    { "id": 2, "name": "交通" },
+    { "id": 3, "name": "生活" },
+    { "id": 4, "name": "收入" }
+  ]
+}
+
