@@ -139,5 +139,6 @@ dist
 .pnp.*
 
 .swc/
-mock/
+mock/*
+!mock/mockState.json
 .runtime-mock.json
