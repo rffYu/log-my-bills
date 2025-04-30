@@ -12,7 +12,7 @@ export const useRecordViewModel = () => {
     const d: RecordItem = {
       id: maxId()+1,
       date: data.date && data.date.trim() !== '' ? data.date : new Date().toLocaleDateString(),
-      type: data.type && data.type.trim() !== '' ? data.type : '1',
+      type: data.type ? data.type : -1,
       currency: data.currency && data.currency.trim() !== '' ? data.currency : 'cny',
       categoryId: data.categoryId ?? 0,
       title: data.title ?? '',
