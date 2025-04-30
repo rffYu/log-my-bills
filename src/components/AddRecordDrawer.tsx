@@ -9,9 +9,20 @@ interface Props {
   onSubmit: (data: Partial<RecordItem>) => void;
 }
 
+const typeOptions = ['支出', '收入'];
+const typeValueMap = {
+  '支出': -1,
+  '收入': 1,
+};
+const typeReverseMap = {
+  '-1': '支出',
+  '1': '收入',
+};
+
 const AddRecordDrawer = ({ visible, onClose, onSubmit }: Props) => {
   const [amount, setAmount] = useState('');
   const [title, setTitle] = useState('');
+  const [type, setType] = useState(null);
   const [categoryId, setCategoryId] = useState(1); // example default
 
   if (!visible) return null;
@@ -22,6 +33,18 @@ const AddRecordDrawer = ({ visible, onClose, onSubmit }: Props) => {
         <Text className="text-lg font-bold">添加记录</Text>
         <Input value={title} onInput={e => setTitle(e.detail.value)} placeholder="标题" className="border border-gray-300 p-2 rounded" />
         <Input type="number" value={amount} onInput={e => setAmount(e.detail.value)} placeholder="金额" className="border border-gray-300 p-2 rounded" />
+
+        <Picker
+          mode="selector"
+          range={ typeOptions }
+          onChange={e => {
+            const selected = typeOptions[Number(e.detail.value)];
+            setType(typeValueMap[selected]);
+        }}>
+          <View className="border border-gray-300 p-2 rounded text-gray-600">
+            { type == null ? '选择类型' : typeReverseMap[type] }
+          </View>
+        </Picker>
 
         <Picker
         mode="selector"
