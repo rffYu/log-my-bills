@@ -1,7 +1,6 @@
 import { Component, PropsWithChildren } from 'react'
 import { Provider } from 'react-redux'
 import store from './store'
-import './app.scss'
 import './tailwind.css'
 
 class App extends Component<PropsWithChildren> {

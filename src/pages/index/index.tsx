@@ -7,8 +7,6 @@ import { useRecordViewModel } from '@/viewmodels/recordVM';
 import { useCategoryRecordViewModel } from '@/viewmodels/catRecVM';
 import PieChart from '@/components/D3PieChart';
 import GlobalContainer from '@/components/GlobalContainer';
-//import './index.scss';
-//import './card.scss';
 
 const Card = ({ title, extra, note, children }: Props) => {
   return (
