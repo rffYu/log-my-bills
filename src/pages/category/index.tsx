@@ -22,7 +22,9 @@ const CatBreakDown = ({ catId, idx }) => {
         height: '220px'
       }} >
       {/* Pie Chart on the left */}
-      <View className="h-[170px]">
+      <View
+        className="pie-chart-container"
+        style={{height: "170px"}}>
         <PieChart
           data={recs.map(d => ({
             value: d.amount,

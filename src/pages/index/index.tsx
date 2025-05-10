@@ -30,7 +30,7 @@ const CatSummary = () => {
   const getColor = (index: number) =>
     d3.interpolateCool(index / totals.length); // same as chart
   return (
-    <View className="cat-summary flex-row gap-4 items-start" style={{
+    <View className="cat-summary" style={{
       display: 'flex',
       flexDirection: 'row',
       gap: 16,
@@ -47,7 +47,7 @@ const CatSummary = () => {
       />
       </View>
 
-        <View className="flex-1" style={{ display: 'flex', flexDirection: 'column' }}>
+        <View className="cat-list" style={{ display: 'flex', flexDirection: 'column' }}>
          {totals.map((item, index) => (
           <View className="cat-item" key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: 8 }}>
               <View
@@ -114,9 +114,7 @@ const IndexPage = () => {
           { getTotalsGroupByDay()?.map(({ date, value }, idx, arr) => (
             <View
               key={date}
-              className={`daily-summary flex justify-between py-2 border-b ${
-idx === arr.length - 1 ? 'border-b-0' : 'border-[#eee]'
-}`}
+              className={'daily-summary'}
             >
                 <Text>{date}</Text>
                 <Text>￥{value}</Text>

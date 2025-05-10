@@ -27,7 +27,7 @@ const AddRecordDrawer = ({ visible, onClose, onSubmit }: Props) => {
   if (!visible) return null;
 
   return (
-    <View className="add-record-drawer">
+    <>
       <View className="drawer-content">
         <Text>添加记录</Text>
         <Input value={title} onInput={e => setTitle(e.detail.value)} placeholder="标题" />
@@ -51,7 +51,7 @@ const AddRecordDrawer = ({ visible, onClose, onSubmit }: Props) => {
         }}>保存</Button>
         <Button onClick={onClose}>取消</Button>
       </View>
-    </View>
+    </>
   );
 };
 

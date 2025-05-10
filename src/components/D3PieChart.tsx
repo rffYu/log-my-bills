@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import Taro, { useReady, useDidShow } from '@tarojs/taro';
 import { View, Canvas } from '@tarojs/components';
 import * as d3 from 'd3';
+import './D3PieChart.scss';
 
 interface DataItem {
   value: number;
@@ -124,7 +125,7 @@ const PieChart: React.FC<Props> = ({
   });
 
   return (
-    <View className="flex justify-center items-center">
+    <View className="pie-chart">
       {Taro.getEnv() === Taro.ENV_TYPE.WEAPP ? (
         <Canvas
           type='2d'
