@@ -22,6 +22,7 @@ const typeReverseMap = {
 const AddRecordDrawer = ({ visible, onClose, onSubmit }: Props) => {
   const [amount, setAmount] = useState('');
   const [title, setTitle] = useState('');
+  const [date, setDate] = useState(new Date().toISOString().slice(0,10));
   const [type, setType] = useState(null);
   const [categoryId, setCategoryId] = useState(1); // example default
 
@@ -34,17 +35,25 @@ const AddRecordDrawer = ({ visible, onClose, onSubmit }: Props) => {
         <Input value={title} onInput={e => setTitle(e.detail.value)} placeholder="标题" className="border border-gray-300 p-2 rounded" />
         <Input type="number" value={amount} onInput={e => setAmount(e.detail.value)} placeholder="金额" className="border border-gray-300 p-2 rounded" />
 
-        <Picker
+        <View className="border border-gray-300 p-2 rounded text-gray-600">
+          <Picker mode="selector">
+            <Text>选择日期：{ date }</Text>
+          </Picker>
+        </View>
+
+        <View className="border border-gray-300 p-2 rounded text-gray-600">
+          <Picker
           mode="selector"
           range={ typeOptions }
           onChange={e => {
             const selected = typeOptions[Number(e.detail.value)];
             setType(typeValueMap[selected]);
-        }}>
-          <View className="border border-gray-300 p-2 rounded text-gray-600">
-            { type == null ? '选择类型' : typeReverseMap[type] }
-          </View>
-        </Picker>
+          }}>
+            <Text>
+              { type == null ? '选择类型' : typeReverseMap[type] }
+            </Text>
+          </Picker>
+        </View>
 
         <Picker
         mode="selector"
