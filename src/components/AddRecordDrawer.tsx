@@ -19,6 +19,14 @@ const typeReverseMap = {
   '1': '收入',
 };
 
+const startDate = new Date('2025-05-01');
+const endDate = new Date('2025-06-01');
+
+const dummyDateRange = [];
+for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
+  dummyDateRange.push(d.toISOString().slice(0, 10));
+}
+
 const AddRecordDrawer = ({ visible, onClose, onSubmit }: Props) => {
   const [amount, setAmount] = useState('');
   const [title, setTitle] = useState('');
@@ -36,7 +44,11 @@ const AddRecordDrawer = ({ visible, onClose, onSubmit }: Props) => {
         <Input type="number" value={amount} onInput={e => setAmount(e.detail.value)} placeholder="金额" className="border border-gray-300 p-2 rounded" />
 
         <View className="border border-gray-300 p-2 rounded text-gray-600">
-          <Picker mode="selector">
+          <Picker mode="selector"
+            range={ dummyDateRange }
+            onChange={e => {
+              const selected = dummyDateRange[Number(e.detail.value)];
+              setDate(selected); }}>
             <Text>选择日期：{ date }</Text>
           </Picker>
         </View>
