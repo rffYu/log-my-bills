@@ -1,5 +1,6 @@
 import { ScrollView, View, Text, Input, Button, Picker } from '@tarojs/components';
 import { useState } from 'react';
+import { useCategoryRecordViewModel } from '@/viewmodels/catRecVM';
 import RecordItem from '@/models/recordModel';
 import './AddRecordDrawer.scss';
 
@@ -32,7 +33,12 @@ const AddRecordDrawer = ({ visible, onClose, onSubmit }: Props) => {
   const [title, setTitle] = useState('');
   const [date, setDate] = useState(new Date().toISOString().slice(0,10));
   const [type, setType] = useState(null);
-  const [categoryId, setCategoryId] = useState(1); // example default
+  const [categoryId, setCategoryId] = useState(null);
+
+  const { getExistingCategories, categoryIdMap } = useCategoryRecordViewModel();
+  const catIdMap = categoryIdMap ?? {};
+
+  const catOptions = (getExistingCategories() ?? []).map(item => item[0]);
 
   if (!visible) return null;
 
@@ -62,17 +68,19 @@ const AddRecordDrawer = ({ visible, onClose, onSubmit }: Props) => {
             setType(typeValueMap[selected]);
           }}>
             <Text>
-              { type == null ? '选择类型' : typeReverseMap[type] }
+              { type == null ? '选择类型' : (typeReverseMap[type] ?? 'invalid type') }
             </Text>
           </Picker>
         </View>
 
         <Picker
         mode="selector"
-        range={['吃饭', '交通']}
-        onChange={e => setCategoryId(Number(e.detail.value))}
+        range={ catOptions }
+        onChange={e => setCategoryId(Number(e.detail.value) + 1)}
       >
-          <View className="border border-gray-300 p-2 rounded text-gray-600">选择分类</View>
+          <View className="border border-gray-300 p-2 rounded text-gray-600">
+            { categoryId == null ? '选择分类' : (catIdMap[categoryId] ?? 'invalid catgory') }
+          </View>
         </Picker>
 
         <Button
