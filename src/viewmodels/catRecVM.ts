@@ -64,6 +64,7 @@ export const useCategoryRecordViewModel = () => {
     getRecordsByCategory: getRecsByCat,
     getTotalsGroupByCategory: getTotalsGroupByCat,
     getTotalByCategory: getTotalByCat,
+    categoryIdMap: catMap
   };
 };
 

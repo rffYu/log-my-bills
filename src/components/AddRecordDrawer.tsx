@@ -1,6 +1,7 @@
 import Taro from '@tarojs/taro';
 import { View, Text, Input, Button, Picker } from '@tarojs/components';
 import { useState } from 'react';
+import { useCategoryRecordViewModel } from '@/viewmodels/catRecVM';
 import RecordItem from '@/models/recordModel';
 
 function verifyInput(title: string, amount: string | number, categoryId: number | null, date: string, type: number | null): string | null {
@@ -42,7 +43,12 @@ const AddRecordDrawer = ({ visible, onClose, onSubmit }: Props) => {
   const [title, setTitle] = useState('');
   const [date, setDate] = useState(new Date().toISOString().slice(0,10));
   const [type, setType] = useState(null);
-  const [categoryId, setCategoryId] = useState(1); // example default
+  const [categoryId, setCategoryId] = useState(null);
+
+  const { getExistingCategories, categoryIdMap } = useCategoryRecordViewModel();
+  const catIdMap = categoryIdMap ?? {};
+
+  const catOptions = (getExistingCategories() ?? []).map(item => item[0]);
 
   if (!visible) return null;
 
@@ -69,13 +75,20 @@ const AddRecordDrawer = ({ visible, onClose, onSubmit }: Props) => {
               const selected = typeOptions[Number(e.detail.value)];
               setType(typeValueMap[selected]);
           }}>
-            <View>{ type == null ? '选择类型' : typeReverseMap[type] }</View>
+            <View>{ type == null ? '选择类型' : (typeReverseMap[type] ?? 'invalid type') }</View>
           </Picker>
         </View>
 
-        <Picker mode="selector" range={['吃饭', '交通']} onChange={e => setCategoryId(Number(e.detail.value))}>
-          <Text>选择分类</Text>
-        </Picker>
+        <View className="cat-picker">
+          <Picker
+            mode="selector"
+            range={ catOptions }
+            onChange={e => setCategoryId(Number(e.detail.value) + 1)}
+          >
+            <View>{ categoryId == null ? '选择分类' : (catIdMap[categoryId] ?? 'invalid catgory') }</View>
+          </Picker>
+        </View>
+
         <Button
         onClick={() => {
           const error = verifyInput(title, amount, categoryId, date, type);
