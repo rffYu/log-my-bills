@@ -1,6 +1,17 @@
+import Taro from '@tarojs/taro';
 import { View, Text, Input, Button, Picker } from '@tarojs/components';
 import { useState } from 'react';
 import RecordItem from '@/models/recordModel';
+
+function verifyInput(title: string, amount: string | number, categoryId: number | null, date: string, type: number | null): string | null {
+  if (!title.trim()) return "标题不能为空";
+  if (!amount) return "金额不能为空";
+  if (isNaN(Number(amount))) return "金额格式错误";
+  if (categoryId === null || isNaN(categoryId)) return "请选择分类";
+  if (!date) return "请选择日期";
+  if (type === null) return "请选择类型";
+  return null;
+}
 
 interface Props {
   visible: boolean;
@@ -65,7 +76,13 @@ const AddRecordDrawer = ({ visible, onClose, onSubmit }: Props) => {
         <Picker mode="selector" range={['吃饭', '交通']} onChange={e => setCategoryId(Number(e.detail.value))}>
           <Text>选择分类</Text>
         </Picker>
-        <Button onClick={() => {
+        <Button
+        onClick={() => {
+          const error = verifyInput(title, amount, categoryId, date, type);
+          if (error) {
+            Taro.showToast({ title: error, icon: 'none' });
+            return;
+          }
           onSubmit({ title, amount: Number(amount), categoryId });
           onClose();
         }}>保存</Button>
