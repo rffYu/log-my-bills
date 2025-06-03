@@ -28,7 +28,7 @@ const CatBreakDown = ({ catId, idx }) => {
         }}
       >
           <BarChart
-          data={recs.map(d => ({ x: d.date, y: d.amount }))}
+          data={recs.map(d => ({ x: d.date.slice(5), y: d.amount }))}
           width={windowWidth * 0.6}
           height={170}
           canvasId={`bar-canvas-${idx}`}
