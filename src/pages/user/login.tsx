@@ -26,9 +26,14 @@ export default function LoginPage() {
   };
 
   return (
-    <View className="login-page">
-      <Text className="title">Hi!</Text>
-      <Button loading={loading} onClick={handleLogin} type="primary">
+    <View className="flex flex-col justify-center items-center h-screen bg-white px-8">
+      <Text className="text-4xl font-bold mb-12 text-gray-800">Hi!</Text>
+      <Button
+        loading={loading}
+        onClick={handleLogin}
+        type="primary"
+        className="bg-green-500 text-white px-8 py-3 rounded-xl text-lg active:bg-green-600"
+      >
         一键微信登录
       </Button>
     </View>
