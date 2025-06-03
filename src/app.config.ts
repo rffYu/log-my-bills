@@ -4,8 +4,8 @@ export default defineAppConfig({
     'pages/category/index',
     'pages/category/manage',
     'pages/month/index',
-    'pages/auth/login',
-    'pages/auth/register'
+    'pages/user/index',
+    'pages/user/login'
   ],
   window: {
     backgroundTextStyle: 'light',
@@ -34,8 +34,8 @@ export default defineAppConfig({
         selectedIconPath: "assets/icons/placeholder.png"
       },
       {
-        pagePath: "pages/pie",
-        text: "Maybe",
+        pagePath: "pages/user/index",
+        text: "我的",
         iconPath: "assets/icons/placeholder.png",
         selectedIconPath: "assets/icons/placeholder.png"
       }
