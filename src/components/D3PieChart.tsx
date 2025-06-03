@@ -83,7 +83,7 @@ const PieChart: React.FC<Props> = ({
       const y = Math.sin(angle) * labelRadius;
 
       ctx.fillStyle = '#fff';
-      ctx.font = '10px sans-serif';
+      ctx.font = '14px sans-serif';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillText(arc.data.label, x, y);
