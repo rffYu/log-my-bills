@@ -75,6 +75,9 @@ const IndexPage = () => {
   const { getTotalByMonth, getTotalsGroupByDay } = useDateRecordViewModel();
   const { getRecentRecords } = useRecordViewModel();
 
+  const { categoryIdMap } = useCategoryRecordViewModel();
+  const catIdMap = categoryIdMap ?? {};
+
   return (
       <View className="index-page">
 
@@ -103,7 +106,7 @@ const IndexPage = () => {
             extra={ `￥${i.amount}` }
             note={ i.date }
           >
-            分类：购物
+            { `分类：${catIdMap[i.categoryId]}` }
           </Card>
         ))}
       </View>
