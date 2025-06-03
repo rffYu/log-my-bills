@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import Taro from '@tarojs/taro';
-import { View, Text } from '@tarojs/components';
+import { View, Button, Text } from '@tarojs/components';
 import { useCategoryRecordViewModel } from '@/viewmodels/catRecVM';
 import BarChart from '@/components/D3BarChart';
 import PieChart from '@/components/D3PieChart';
@@ -66,8 +66,13 @@ const CategoryPage = () => {
 
   const cats = getExistingCategories();
 
+  const goToCategoryManagementPage = () => {
+    Taro.navigateTo({ url: '/pages/category/manage' });
+  };
+
   return (
     <View className="category-page-container p-4 space-y-6 bg-gray-50 min-h-screen">
+      <Button size="mini" onClick={ goToCategoryManagementPage }>管理分类</Button>
       <View className="flex justify-center">
         <BarChart data={totals.map(d => ({x: d.catName, y: d.total}))} width={windowWidth - 60} height={240} />
       </View>
