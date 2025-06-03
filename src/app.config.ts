@@ -3,6 +3,8 @@ export default defineAppConfig({
     'pages/index/index',
     'pages/category/index',
     'pages/month/index',
+    'pages/user/index',
+    'pages/user/login'
   ],
   window: {
     backgroundTextStyle: 'light',
@@ -30,6 +32,12 @@ export default defineAppConfig({
         iconPath: "assets/icons/placeholder.png",
         selectedIconPath: "assets/icons/placeholder.png"
       },
+      {
+        pagePath: "pages/user/index",
+        text: "我的",
+        iconPath: "assets/icons/placeholder.png",
+        selectedIconPath: "assets/icons/placeholder.png"
+      }
     ],
     selectedColor: "#FF9C00",
     backgroundColor: "#ffffff",
