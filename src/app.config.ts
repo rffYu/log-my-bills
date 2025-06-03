@@ -4,6 +4,8 @@ export default defineAppConfig({
     'pages/category/index',
     'pages/category/manage',
     'pages/month/index',
+    'pages/auth/login',
+    'pages/auth/register'
   ],
   window: {
     backgroundTextStyle: 'light',
