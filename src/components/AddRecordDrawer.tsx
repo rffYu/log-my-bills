@@ -96,7 +96,12 @@ const AddRecordDrawer = ({ visible, onClose, onSubmit }: Props) => {
             Taro.showToast({ title: error, icon: 'none' });
             return;
           }
-          onSubmit({ title, amount: Number(amount), categoryId });
+          onSubmit({
+              title,
+              amount: Number(amount),
+              date,
+              type,
+              categoryId });
           onClose();
         }}>保存</Button>
         <Button onClick={onClose}>取消</Button>
