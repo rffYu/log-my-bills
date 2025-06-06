@@ -19,26 +19,26 @@ export default defineAppConfig({
       {
         pagePath: "pages/index/index",
         text: "账单",
-        iconPath: "assets/icons/placeholder.png",
-        selectedIconPath: "assets/icons/placeholder.png"
+        iconPath: "assets/icons/home.png",
+        selectedIconPath: "assets/icons/home_fill.png"
       },
       {
         pagePath: "pages/month/index",
         text: "月度帐单",
-        iconPath: "assets/icons/placeholder.png",
-        selectedIconPath: "assets/icons/placeholder.png"
+        iconPath: "assets/icons/calendar.png",
+        selectedIconPath: "assets/icons/calendar_fill.png"
       },
       {
         pagePath: "pages/category/index",
         text: "分类帐单",
-        iconPath: "assets/icons/placeholder.png",
-        selectedIconPath: "assets/icons/placeholder.png"
+        iconPath: "assets/icons/category.png",
+        selectedIconPath: "assets/icons/category_fill.png"
       },
       {
         pagePath: "pages/user/index",
         text: "我的",
-        iconPath: "assets/icons/placeholder.png",
-        selectedIconPath: "assets/icons/placeholder.png"
+        iconPath: "assets/icons/person.png",
+        selectedIconPath: "assets/icons/person_fill.png"
       }
     ],
     selectedColor: "#FF9C00",
