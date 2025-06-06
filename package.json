@@ -29,6 +29,7 @@
     "dev:jd": "npm run build:jd -- --watch",
     "dev:harmony-hybrid": "npm run build:harmony-hybrid -- --watch",
     "inject:mock": "node scripts/injectMock.js",
+    "inject:mock-storage": "node scripts/injectMockStorage.js",
     "postinstall": "weapp-tw patch"
   },
   "browserslist": {

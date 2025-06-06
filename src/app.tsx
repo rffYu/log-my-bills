@@ -1,5 +1,9 @@
 import { Component, PropsWithChildren } from 'react'
 import { Provider } from 'react-redux'
+import setMockStorage from '@/utils/mockStorage';
+if (process.env.NODE_ENV === 'development') {
+  setMockStorage();
+}
 import store from './store'
 import './app.scss'
 import './tailwind.css'

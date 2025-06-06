@@ -141,4 +141,9 @@ dist
 .swc/
 mock/*
 !mock/mockState.json
+!mock/test-6.json
+!mock/test-7.json
+!mock/mockStorage.json
 .runtime-mock.json
+.runtime-mock-storage.json
+src/assets
