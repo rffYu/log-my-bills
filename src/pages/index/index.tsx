@@ -71,8 +71,9 @@ const CatSummary = () => {
 
 const IndexPage = () => {
   const records = useSelector((state: RootState) => state.record);
-  const currentMonth = new Date().toISOString().slice(0, 7);
-  const allMonths = ['2025/04', '2025/03', '2025/02'];
+  //const currentMonth = new Date().toISOString().slice(0, 7);
+  const currentMonth = '2025-04';
+  const allMonths = ['2025-04', '2025-03', '2025-02'];
 
   const { getTotalByMonth, getTotalsGroupByDay } = useDateRecordViewModel();
   const { getRecentRecords } = useRecordViewModel();
