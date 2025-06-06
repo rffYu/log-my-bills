@@ -5,7 +5,9 @@ export default defineAppConfig({
     'pages/category/manage',
     'pages/month/index',
     'pages/user/index',
-    'pages/user/login'
+    'pages/user/login',
+    'pages/admin/addUser',
+    'pages/admin/deleteUser',
   ],
   window: {
     backgroundTextStyle: 'light',
