@@ -14,11 +14,11 @@ const Card = ({ title, extra, note, children }: Props) => {
   return (
     <View className="custom-card">
       <View className="card-header">
-        <Text className="card-title">{ title }</Text>
-        { extra && <Text className="card-extra">{ extra }</Text> }
+        <Text className="card-title text-sm m-1 p-1">{ title }</Text>
+        { extra && <Text className="card-extra text-sm m-1 p-1">{ extra }</Text> }
       </View>
       <View className="card-content">{ children }</View>
-      { note && <Text className="card-note">{ note }</Text> }
+      { note && <Text className="card-note text-sm m-1 p-1">{ note }</Text> }
     </View>
   );
 };
@@ -105,11 +105,11 @@ const IndexPage = () => {
             { getRecentRecords(3).map(i => (
               <Card
                 key={i.id}
-                title={ `记录 ${i.title}` }
+                title={ i.title ?? '' }
                 extra={ `￥${i.amount}` }
                 note={ i.date }
               >
-                { `分类：${catIdMap[i.categoryId]}` }
+                <Text className="text-sm m-1 p-1">{ `分类：${catIdMap[i.categoryId]}` }</Text>
               </Card>
             ))}
           </View>
