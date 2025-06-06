@@ -78,7 +78,7 @@ export default function AddUser() {
     <View className="p-4">
       <View className="mb-4">
         <Input
-          className="border rounded px-3 py-2 w-full"
+          className="border rounded p-3 m-3"
           placeholder="用户 OpenID"
           value={openid}
           onInput={e => setOpenid(e.detail.value)}
