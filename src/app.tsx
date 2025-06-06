@@ -1,7 +1,7 @@
 import { Component, PropsWithChildren } from 'react'
 import { Provider } from 'react-redux'
 import setMockStorage from '@/utils/mockStorage';
-if (process.env.NODE_ENV === 'development') {
+if (true) {
   setMockStorage();
 }
 import store from './store'
