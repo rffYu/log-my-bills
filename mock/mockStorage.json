@@ -1,5 +1,9 @@
 {
   "token": "mock-token-789",
-  "userRole": "admin"
+  "userInfo": {
+    "role": "admin",
+    "nickname": "nickname",
+    "openid": "test-open-id"
+  }
 }
 
