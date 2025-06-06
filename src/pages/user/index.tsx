@@ -55,7 +55,7 @@ const UserPage = () => {
             <Text className="text-sm text-gray-600">角色：{userInfo.role}</Text>
 
             <Button
-              className="w-full bg-purple-500 text-white text-base py-2 rounded-md hover:bg-purple-600"
+              className="w-full bg-gray-200 text-black text-base m-2 p-2 rounded-md hover:bg-gray-300"
               onClick={() => {
                 // 这里替换成你的 rsync 逻辑
                 Taro.showToast({ title: '正在同步...', icon: 'loading' });
@@ -69,7 +69,7 @@ const UserPage = () => {
             </Button>
 
             <Button
-              className="w-full bg-red-500 text-white text-base py-2 rounded-md shadow hover:bg-red-600"
+              className="w-full bg-gray-200 text-black text-base m-2 p-2 rounded-md shadow hover:bg-gray-300"
               onClick={handleLogout}
             >
               退出登录
@@ -82,14 +82,14 @@ const UserPage = () => {
               <Text className="text-lg font-semibold text-gray-800">管理员功能</Text>
 
               <Button
-                className="w-full bg-blue-500 text-white text-base py-2 rounded-md hover:bg-blue-600"
+                className="w-full bg-gray-200 text-black text-base m-2 p-2 rounded-md hover:bg-gray-300"
                 onClick={() => Taro.navigateTo({ url: '/pages/admin/addUser' })}
               >
                 绑定用户
               </Button>
 
               <Button
-                className="w-full bg-blue-500 text-white text-base py-2 rounded-md hover:bg-blue-600"
+                className="w-full bg-gray-200 text-black text-base m-2 p-2 rounded-md hover:bg-gray-300"
                 onClick={() => Taro.navigateTo({ url: '/pages/admin/deleteUser' })}
               >
                 删除用户
@@ -101,7 +101,7 @@ const UserPage = () => {
           <View className="space-y-4 text-center mt-24">
             <Text className="text-gray-600 text-lg">未登录</Text>
             <Button
-              className="bg-green-500 text-white px-6 py-2 rounded-md shadow hover:bg-green-600"
+              className="text-black px-6 m-2 p-2 bg-gray-200 text-black rounded-md shadow hover:bg-gray-300"
               onClick={() => Taro.redirectTo({ url: '/pages/user/login' })}
             >
               去登录

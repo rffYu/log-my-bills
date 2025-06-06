@@ -32,7 +32,7 @@ export default function DeleteUser() {
           onInput={e => setOpenid(e.detail.value)}
         />
       </View>
-      <Button className="bg-red-500 text-white rounded" onClick={handleDelete}>
+      <Button className="m-2 p-2 bg-red-500 text-white rounded" onClick={handleDelete}>
         删除用户
       </Button>
     </View>

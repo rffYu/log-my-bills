@@ -42,7 +42,7 @@ export default function AddUser() {
         />
       </View>
       <Button
-        className="bg-green-500 text-white rounded"
+        className="m-2 p-2 bg-green-500 text-white rounded"
         loading={loading}
         onClick={handleSubmit}
       >
