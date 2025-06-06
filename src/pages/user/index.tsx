@@ -56,6 +56,20 @@ const UserPage = () => {
           )}
 
           <Button
+            className="w-full bg-purple-500 text-white text-base py-2 rounded-md hover:bg-purple-600"
+            onClick={() => {
+              // 这里替换成你的 rsync 逻辑
+              Taro.showToast({ title: '正在同步...', icon: 'loading' });
+              // 模拟异步任务
+              setTimeout(() => {
+                Taro.showToast({ title: '同步完成', icon: 'success' });
+              }, 1500);
+            }}
+          >
+            同步数据
+          </Button>
+
+          <Button
             className="bg-red-500 text-white mt-2"
             onClick={handleLogout}
           >
