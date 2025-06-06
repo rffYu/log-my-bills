@@ -1,11 +1,12 @@
-import { View, Text, Button } from '@tarojs/components';
+import { View, Text, Image, Button } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import { useEffect, useState } from 'react';
-import useUserRole from '@/hooks/useUserRole';
+import useUserInfo from '@/hooks/useUserInfo';
+import defaultAvatar from '@/assets/avatar/default.jpg';
 
 const UserPage = () => {
   const [token, setToken] = useState<string | null>(null);
-  const { role, fetchUserRole } = useUserRole()
+  const { userInfo, fetchUserInfo } = useUserInfo()
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -15,7 +16,7 @@ const UserPage = () => {
         setToken(storedToken);
       }
 
-      await fetchUserRole();
+      await fetchUserInfo();
       setLoading(false);
     };
 
@@ -24,9 +25,8 @@ const UserPage = () => {
 
   const handleLogout = () => {
     Taro.removeStorageSync('token');
-    Taro.removeStorageSync('userRole');
+    Taro.removeStorageSync('userInfo');
     setToken('');
-    setRole(null);
     Taro.showToast({ title: '已退出登录', icon: 'none' });
   };
 
@@ -38,9 +38,22 @@ const UserPage = () => {
     <View className="p-6 space-y-4">
       {token ? (
         <View className="space-y-4">
-          <Text className="text-lg font-semibold">当前已登录</Text>
-          <Text className="text-sm text-gray-500 break-all">Token: {token}</Text>
-          <Text className="text-sm text-gray-500">角色: {role || '未知'}</Text>
+          {userInfo && (
+            <View className="flex flex-col items-center space-y-2" style={ {display: "flex"} }>
+              <Image
+                src={ userInfo.avatar || defaultAvatar }
+                style={{
+                  width: '80px',
+                  height: '80px',
+                  borderRadius: '50%',
+                  objectFit: 'cover',
+                }}
+              />
+              <Text className="text-lg font-medium">昵称: {userInfo.nickname}</Text>
+              <Text className="text-sm text-gray-500">OpenID: {userInfo.openid}</Text>
+              <Text className="text-sm text-gray-600">角色: {userInfo.role}</Text>
+            </View>
+          )}
 
           <Button
             className="bg-red-500 text-white mt-2"
@@ -49,7 +62,7 @@ const UserPage = () => {
             退出登录
           </Button>
 
-          {role === 'admin' && (
+          {userInfo.role === 'admin' && (
             <View className="mt-6 space-y-2">
               <Text className="font-semibold text-gray-700">管理员功能</Text>
               <Button
