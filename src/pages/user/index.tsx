@@ -3,6 +3,7 @@ import Taro from '@tarojs/taro';
 import { useEffect, useState } from 'react';
 import useUserInfo from '@/hooks/useUserInfo';
 import defaultAvatar from '@/assets/avatar/default.jpg';
+import './index.scss';
 
 const UserPage = () => {
   const [token, setToken] = useState<string | null>(null);
@@ -35,44 +36,46 @@ const UserPage = () => {
   }
 
   return (
-    <View className="p-6 space-y-4">
+    <View className="user-page bg-gray-50 min-h-screen p-4">
       {token ? (
-        <View className="space-y-4">
-          {userInfo && (
-            <View className="flex flex-col items-center space-y-2" style={ {display: "flex"} }>
-              <Image
-                src={ userInfo.avatar || defaultAvatar }
-                style={{
-                  width: '80px',
-                  height: '80px',
-                  borderRadius: '50%',
-                  objectFit: 'cover',
-                }}
-              />
-              <Text className="text-lg font-medium">昵称: {userInfo.nickname}</Text>
-              <Text className="text-sm text-gray-500">OpenID: {userInfo.openid}</Text>
-              <Text className="text-sm text-gray-600">角色: {userInfo.role}</Text>
-            </View>
-          )}
+        <View className="space-y-6">
+          {/* 用户信息卡片 */}
+          <View className="box p-6 rounded-2xl bg-white shadow-md flex flex-col items-center space-y-4" style={{ display: "flex" }}>
+            <Image
+              src={userInfo.avatar || defaultAvatar}
+              style={{
+                width: '160px',
+                height: '160px',
+                borderRadius: '50%',
+                objectFit: 'cover',
+              }}
+            />
+            <Text className="text-xl font-bold text-gray-800">昵称：{userInfo.nickname}</Text>
+            <Text className="text-sm text-gray-500 break-all">OpenID：{userInfo.openid}</Text>
+            <Text className="text-sm text-gray-600">角色：{userInfo.role}</Text>
 
-          <Button
-            className="bg-red-500 text-white mt-2"
-            onClick={handleLogout}
-          >
-            退出登录
-          </Button>
+            <Button
+              className="w-full bg-red-500 text-white text-base py-2 rounded-md shadow hover:bg-red-600"
+              onClick={handleLogout}
+            >
+              退出登录
+            </Button>
+          </View>
 
+          {/* 管理员功能 */}
           {userInfo.role === 'admin' && (
-            <View className="mt-6 space-y-2">
-              <Text className="font-semibold text-gray-700">管理员功能</Text>
+            <View className="box p-6 rounded-2xl bg-white shadow-md space-y-4">
+              <Text className="text-lg font-semibold text-gray-800">管理员功能</Text>
+
               <Button
-                className="bg-blue-500 text-white"
+                className="w-full bg-blue-500 text-white text-base py-2 rounded-md hover:bg-blue-600"
                 onClick={() => Taro.navigateTo({ url: '/pages/admin/addUser' })}
               >
                 绑定用户
               </Button>
+
               <Button
-                className="bg-blue-500 text-white"
+                className="w-full bg-blue-500 text-white text-base py-2 rounded-md hover:bg-blue-600"
                 onClick={() => Taro.navigateTo({ url: '/pages/admin/deleteUser' })}
               >
                 删除用户
@@ -81,16 +84,16 @@ const UserPage = () => {
           )}
         </View>
       ) : (
-        <View className="space-y-4">
-          <Text className="text-gray-600">未登录</Text>
-          <Button
-            className="bg-green-500 text-white"
-            onClick={() => Taro.redirectTo({ url: '/pages/user/login' })}
-          >
-            去登录
-          </Button>
-        </View>
-      )}
+          <View className="space-y-4 text-center mt-24">
+            <Text className="text-gray-600 text-lg">未登录</Text>
+            <Button
+              className="bg-green-500 text-white px-6 py-2 rounded-md shadow hover:bg-green-600"
+              onClick={() => Taro.redirectTo({ url: '/pages/user/login' })}
+            >
+              去登录
+            </Button>
+          </View>
+        )}
     </View>
   );
 };
