@@ -4,6 +4,7 @@ import { View, Button, Text } from '@tarojs/components';
 import { useCategoryRecordViewModel } from '@/viewmodels/catRecVM';
 import BarChart from '@/components/D3BarChart';
 import PieChart from '@/components/D3PieChart';
+import CategoryBudget from '@/components/CategoryBudget';
 import GlobalContainer from '@/components/GlobalContainer';
 import './index.scss';
 
@@ -86,6 +87,9 @@ const CategoryPage = () => {
               </View>
             <View className="category-chart mt-4">
               <CatBreakDown catId={ id } idx={ index }/>
+            </View>
+            <View>
+              <CategoryBudget categoryIdx={ id }/>
             </View>
           </View>
         ))}
