@@ -1,6 +1,6 @@
 import Taro from '@tarojs/taro';
 import React, { useEffect, useState } from 'react';
-import { View, Text, Input, Picker } from '@tarojs/components';
+import { View, Text, Input, Picker, Button } from '@tarojs/components';
 import { useDateRecordViewModel } from '@/viewmodels/dtRecVM';
 import { useCategoryRecordViewModel } from '@/viewmodels/catRecVM';
 
@@ -63,9 +63,12 @@ const BudgetManagerCategory: React.FC = () => {
         onInput={(e) => setInputAmount(e.detail.value)}
       />
 
-      <View onClick={saveBudget} style={{ marginTop: 12, background: '#6190E8', padding: '6px 12px', color: 'white', borderRadius: 4 }}>
+      <Button
+        className="w-full text-black text-base m-2 p-2 rounded-md"
+        onClick={saveBudget}
+        style={{ marginTop: 12, background: '#6190E8', padding: '6px 12px', color: 'white', borderRadius: 4 }}>
         保存预算
-      </View>
+      </Button>
 
       <View style={{ marginTop: 24 }}>
         <Text style={{ fontWeight: 'bold' }}>预算使用情况</Text>
@@ -131,12 +134,13 @@ const BudgetManagerMonthly: React.FC = () => {
         value={inputAmount}
         onInput={(e) => setInputAmount(e.detail.value)}
       />
-      <View
+      <Button
+        className="w-full text-black text-base m-2 p-2 rounded-md"
         onClick={saveBudget}
         style={{ marginTop: 12, background: '#6190E8', padding: '6px 12px', color: 'white', borderRadius: 4 }}
       >
         保存预算
-      </View>
+      </Button>
 
       <View style={{ marginTop: 24 }}>
         <Text style={{ fontWeight: 'bold' }}>预算使用情况</Text>
@@ -159,9 +163,14 @@ const BudgetManagerMonthly: React.FC = () => {
 
 const BudgetManagerPage: React.FC = () => {
   return (
-    <View className="budget-manager-page">
-      <BudgetManagerMonthly />
-      <BudgetManagerCategory />
+    <View className="budget-manager-page" style={{ padding: "16px", background: "#fafafa" }}>
+      <View className="p-4 m-4 rounded-xl bg-white shadow">
+        <BudgetManagerMonthly />
+      </View>
+
+      <View className="p-4 m-4 rounded-xl bg-white shadow">
+        <BudgetManagerCategory />
+      </View>
     </View>
   );
 };

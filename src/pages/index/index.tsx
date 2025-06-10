@@ -94,14 +94,16 @@ const IndexPage = () => {
         <Text className="month-text text-sm text-gray-500 mt-2">当前月份：{ currentMonth }</Text>
       </View>
 
-      <View>
-        <MonthlyBudget currentMonth={ currentMonth }/>
-      </View>
-
       {/* Category Pie Chart */}
       <View className="chart-box p-4 rounded-2xl bg-white shadow">
         <Text className="section-title text-xl font-semibold mb-2 text-gray-800">分类支出图</Text>
         <CatSummary/>
+      </View>
+
+      {/* Budget View */}
+      <View className="budget-box p-4 rounded-xl bg-white shadow">
+        <Text className="section-title text-xl font-semibold mb-2 text-gray-800">预算使用</Text>
+        <MonthlyBudget currentMonth={ currentMonth }/>
       </View>
 
       {/* Recent Records */}

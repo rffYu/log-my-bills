@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, Input  } from '@tarojs/components';
 import { useDateRecordViewModel } from '@/viewmodels/dtRecVM';
 import { useCategoryRecordViewModel } from '@/viewmodels/catRecVM';
-import D3BudgetChart from '@/components/D3BudgetChart';
 
 // 类型定义
 type BudgetItem = {
@@ -42,16 +41,8 @@ const MonthlyBudget: React.FC = ({ currentMonth }) => {
       <View
         hoverStyle={{ backgroundColor: '#f5f5f5' }}
         onClick={ goToBudgetManagementPage }>
-        <Text style={{ fontWeight: 'bold' }}>预算使用情况</Text>
         <View style={{ marginTop: 12 }}>
           <Text>￥{spent} / ￥{budget.amount}（{percent}%）</Text>
-          <D3BudgetChart
-            data={totals.map(item => ({
-              value: Math.abs(item.total),
-              label: item.catName
-            }))}
-            budget={{ total: budget.amount }}
-            width={ windowWidth - 60 } />
           <View style={{ height: 10, background: '#eee', borderRadius: 4, overflow: 'hidden', marginTop: 4 }}>
             <View
               style={{
