@@ -72,7 +72,7 @@ const D3BudgetBarChart: React.FC<Props> = ({ data, budget, width = 300, height =
 
     segments.forEach((d, i) => {
       const barWidth = (d.value / budget.total) * innerWidth;
-      ctx.fillStyle = d.label === 'Unused' ? '#ddd' : d3.interpolateCool(i / segments.length);
+      ctx.fillStyle = d.label === 'Unused' ? '#ddd' : d3.interpolateViridis(i / segments.length);
       ctx.fillRect(xPos, 0, barWidth, innerHeight);
 
       // Label inside bar

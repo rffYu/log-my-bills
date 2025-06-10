@@ -31,7 +31,7 @@ const CatSummary = () => {
   const windowWidth = Taro.getSystemInfoSync().windowWidth;
   const pieWidth = windowWidth * 0.67
   const getColor = (index: number) =>
-    d3.interpolateCool(index / totals.length); // same as chart
+    d3.interpolateViridis(index / totals.length); // same as chart
   return (
     <View className="cat-summary flex-row gap-4 items-start" style={{
       display: 'flex',
