@@ -4,17 +4,12 @@ import { View, Text, Input  } from '@tarojs/components';
 import { useDateRecordViewModel } from '@/viewmodels/dtRecVM';
 import { useCategoryRecordViewModel } from '@/viewmodels/catRecVM';
 
-// 类型定义
-type BudgetItem = {
-  amount: number;
-};
-
  interface Props {
   currentMonth: string;
 }
 
 const MonthlyBudget: React.FC = ({ currentMonth }) => {
-  const [budget, setBudget] = useState<BudgetItem>({ amount: 0 });
+  const [budget, setBudget] = useState<BudgetItem>(0);
   const { getTotalByMonth } = useDateRecordViewModel();
   const { getTotalsGroupByCategory } = useCategoryRecordViewModel();
   const goToBudgetManagementPage = () => {
@@ -23,13 +18,12 @@ const MonthlyBudget: React.FC = ({ currentMonth }) => {
 
   // 加载本地存储中的预算
   useEffect(() => {
-    // const storedBudget = Taro.getStorageSync('monthly-budget') || { amount: 1000 };
-    const storedBudget = { amount: 3000 };
+    const storedBudget = Taro.getStorageSync('monthly-budget') || 1000;
     setBudget(storedBudget);
   }, []);
 
   const spent = getTotalByMonth(currentMonth);
-  const percent = Math.min(100, Math.round((spent / budget.amount) * 100));
+  const percent = Math.min(100, Math.round((spent / budget) * 100));
   const totals = getTotalsGroupByCategory() ?? [];
 
   const systemInfo = Taro.getSystemInfoSync();
@@ -42,7 +36,7 @@ const MonthlyBudget: React.FC = ({ currentMonth }) => {
         hoverStyle={{ backgroundColor: '#f5f5f5' }}
         onClick={ goToBudgetManagementPage }>
         <View style={{ marginTop: 12 }}>
-          <Text>￥{spent} / ￥{budget.amount}（{percent}%）</Text>
+          <Text>￥{spent} / ￥{budget}（{percent}%）</Text>
           <View style={{ height: 10, background: '#eee', borderRadius: 4, overflow: 'hidden', marginTop: 4 }}>
             <View
               style={{
