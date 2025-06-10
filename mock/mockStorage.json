@@ -4,6 +4,10 @@
     "role": "admin",
     "nickname": "nickname",
     "openid": "test-open-id"
-  }
+  },
+  "monthly-budget": 1000,
+  "budgets": [
+    {"categoryIdx": 1, "amount": 500}
+  ]
 }
 

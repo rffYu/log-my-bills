@@ -6,6 +6,7 @@ import { useDateRecordViewModel } from '@/viewmodels/dtRecVM';
 import { useRecordViewModel } from '@/viewmodels/recordVM';
 import { useCategoryRecordViewModel } from '@/viewmodels/catRecVM';
 import PieChart from '@/components/D3PieChart';
+import MonthlyBudget from '@/components/MonthlyBudget';
 import GlobalContainer from '@/components/GlobalContainer';
 import './index.scss';
 import './card.scss';
@@ -91,6 +92,10 @@ const IndexPage = () => {
           <Text className="total-text text-3xl font-bold text-rose-500">{ `￥${getTotalByMonth(currentMonth)}` }</Text>
         </View>
         <Text className="month-text text-sm text-gray-500 mt-2">当前月份：{ currentMonth }</Text>
+      </View>
+
+      <View>
+        <MonthlyBudget currentMonth={ currentMonth }/>
       </View>
 
       {/* Category Pie Chart */}
