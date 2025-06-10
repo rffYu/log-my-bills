@@ -70,16 +70,16 @@ const UserPage = () => {
 
             <Button
               className="w-full bg-gray-200 text-black text-base m-2 p-2 rounded-md shadow hover:bg-gray-300"
-              onClick={handleLogout}
+              onClick={() => Taro.navigateTo({ url: '/pages/user/export' })}
             >
-              退出登录
+              导出数据
             </Button>
 
             <Button
               className="w-full bg-gray-200 text-black text-base m-2 p-2 rounded-md shadow hover:bg-gray-300"
-              onClick={() => Taro.navigateTo({ url: '/pages/user/export' })}
+              onClick={handleLogout}
             >
-              导出数据
+              退出登录
             </Button>
           </View>
 
