@@ -47,7 +47,7 @@ export default function ExportExcelPage() {
     <View className="export-page p-6 space-y-4 min-h-screen bg-gray-50">
       <Text className="text-lg font-semibold text-gray-800">导出数据为Excel</Text>
       <Button
-        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+        className="bg-blue-500 text-white px-4 py-2 m-4 rounded hover:bg-blue-600"
         loading={loading}
         onClick={handleExport}
       >

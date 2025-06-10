@@ -76,7 +76,7 @@ const UserPage = () => {
             </Button>
 
             <Button
-              className="bg-blue-500 text-white"
+              className="w-full bg-gray-200 text-black text-base m-2 p-2 rounded-md shadow hover:bg-gray-300"
               onClick={() => Taro.navigateTo({ url: '/pages/user/export' })}
             >
               导出数据
