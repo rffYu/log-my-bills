@@ -71,7 +71,7 @@ const PieChart: React.FC<Props> = ({
 
       ctx.closePath();
 
-      ctx.fillStyle = d3.interpolateViridis(i / data.length);
+      ctx.fillStyle = d3.interpolatePlasma(i / data.length);
       ctx.fill();
       ctx.strokeStyle = '#fff';
       ctx.stroke();

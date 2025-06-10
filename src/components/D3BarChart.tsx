@@ -69,7 +69,7 @@ const BarChart: React.FC<Props> = ({ data, width = 300, height = 200, canvasId =
       if (color) {
         ctx.fillStyle = color;
       } else {
-        ctx.fillStyle = d3.interpolateViridis(i / data.length);
+        ctx.fillStyle = d3.interpolatePlasma(i / data.length);
       }
       ctx.fillRect(x, y, xScale.bandwidth(), barHeight);
     });
