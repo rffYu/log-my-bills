@@ -9,6 +9,7 @@ export default defineAppConfig({
     'pages/user/export',
     'pages/admin/addUser',
     'pages/admin/deleteUser',
+    'pages/budget/manage'
   ],
   window: {
     backgroundTextStyle: 'light',

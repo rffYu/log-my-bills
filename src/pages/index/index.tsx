@@ -6,6 +6,7 @@ import { useDateRecordViewModel } from '@/viewmodels/dtRecVM';
 import { useRecordViewModel } from '@/viewmodels/recordVM';
 import { useCategoryRecordViewModel } from '@/viewmodels/catRecVM';
 import PieChart from '@/components/D3PieChart';
+import MonthlyBudget from '@/components/MonthlyBudget';
 import GlobalContainer from '@/components/GlobalContainer';
 import './index.scss';
 import './card.scss';
@@ -88,6 +89,10 @@ const IndexPage = () => {
         <Picker mode="selector" range={ allMonths }>
           <Text className="month-text">当前月份：{ currentMonth }</Text>
         </Picker>
+      </View>
+
+      <View>
+        <MonthlyBudget currentMonth={ currentMonth }/>
       </View>
 
       {/* Category Pie Chart */}
