@@ -74,6 +74,13 @@ const UserPage = () => {
             >
               退出登录
             </Button>
+
+            <Button
+              className="bg-blue-500 text-white"
+              onClick={() => Taro.navigateTo({ url: '/pages/user/export' })}
+            >
+              导出数据
+            </Button>
           </View>
 
           {/* 管理员功能 */}
