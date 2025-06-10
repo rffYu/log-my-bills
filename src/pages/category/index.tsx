@@ -88,7 +88,7 @@ const CategoryPage = () => {
             <View className="category-chart mt-4">
               <CatBreakDown catId={ id } idx={ index }/>
             </View>
-            <View>
+            <View className="category-budget mt-10">
               <CategoryBudget categoryIdx={ id }/>
             </View>
           </View>

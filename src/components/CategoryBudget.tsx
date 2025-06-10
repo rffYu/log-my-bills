@@ -39,7 +39,7 @@ const MonthlyBudget: React.FC = ({ categoryIdx }) => {
       <View
         hoverStyle={{ backgroundColor: '#f5f5f5' }}
         onClick={ goToBudgetManagementPage }>
-        <Text style={{ fontWeight: 'bold' }}>预算使用情况</Text>
+        <Text className="text-sm text-gray-500 font-semibold">预算使用情况</Text>
         <View style={{ marginTop: 12 }}>
           <Text>￥{spent} / ￥{budget}（{percent}%）</Text>
           <View style={{ height: 10, background: '#eee', borderRadius: 4, overflow: 'hidden', marginTop: 4 }}>
