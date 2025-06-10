@@ -44,7 +44,7 @@ export default defineAppConfig({
         selectedIconPath: "assets/icons/person_fill.png"
       }
     ],
-    selectedColor: "#FF9C00",
+    selectedColor: "#4169e1",
     backgroundColor: "#ffffff",
     borderStyle: "black"
   }

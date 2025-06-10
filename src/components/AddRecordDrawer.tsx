@@ -63,10 +63,13 @@ const AddRecordDrawer = ({ visible, onClose, onSubmit }: Props) => {
           <View className="border border-gray-300 p-2 rounded text-gray-600">选择分类</View>
         </Picker>
 
-        <Button className="bg-blue-500 text-white rounded" onClick={() => {
-          onSubmit({ title, amount: Number(amount), categoryId });
-          onClose();
-        }}>保存</Button>
+        <Button
+          className="text-white rounded"
+          style={{ backgroundColor: '#4169e1' }}
+          onClick={() => {
+            onSubmit({ title, amount: Number(amount), categoryId });
+            onClose();
+          }}>保存</Button>
 
         <Button className="bg-gray-300 text-black rounded" onClick={onClose}>取消</Button>
       </View>

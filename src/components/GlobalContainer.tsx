@@ -32,9 +32,10 @@ const GlobalContainer = () => {
       {isWeapp ? (
         // 👇 Use cover-view on WeApp
         <CoverView
-          className="fixed bottom-10 right-5 w-12 h-12 bg-blue-500 rounded-full z-[999]"
+          className="fixed bottom-10 right-5 w-12 h-12 rounded-full z-[999]"
           style={{
             display: drawerVisible ? 'none' : 'flex',
+            backgroundColor: '#4169e1',
             alignItems: 'center',
             justifyContent: 'center',
             textAlign: 'center',
@@ -49,9 +50,10 @@ const GlobalContainer = () => {
       ) : (
           // 👇 Use normal View on H5
           <View
-            className="fixed bottom-10 right-5 w-12 h-12 bg-blue-500 rounded-full z-[999]"
+            className="fixed bottom-10 right-5 w-12 h-12 rounded-full z-[999]"
             style={{
               display: drawerVisible ? 'none' : 'flex',
+              backgroundColor: '#4169e1',
               alignItems: 'center',
               justifyContent: 'center',
               textAlign: 'center',
