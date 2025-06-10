@@ -86,7 +86,7 @@ const IndexPage = () => {
       <View className="index-page p-4 space-y-6 bg-gray-50 min-h-screen">
 
       {/* Top summary block */}
-      <View className="summary-box p-4 rounded-2xl bg-white shadow">
+      <View className="summary-box p-4 rounded-xl bg-white shadow">
         <View>
           <Text className="section-title text-xl font-semibold mb-2 text-gray-800">本月总支出</Text>
           <Text className="total-text text-3xl font-bold text-rose-500">{ `￥${getTotalByMonth(currentMonth)}` }</Text>
@@ -95,7 +95,7 @@ const IndexPage = () => {
       </View>
 
       {/* Category Pie Chart */}
-      <View className="chart-box p-4 rounded-2xl bg-white shadow">
+      <View className="chart-box p-4 rounded-xl bg-white shadow">
         <Text className="section-title text-xl font-semibold mb-2 text-gray-800">分类支出图</Text>
         <CatSummary/>
       </View>
@@ -107,7 +107,7 @@ const IndexPage = () => {
       </View>
 
       {/* Recent Records */}
-      <View className="records-box p4 p-4 rounded-2xl bg-white shadow">
+      <View className="records-box p4 p-4 rounded-xl bg-white shadow">
         <Text className="section-title text-xl font-semibold mb-2 text-gray-800">最近记录</Text>
           <View className="space-y-3">
             { getRecentRecords(3).map(i => (
@@ -124,7 +124,7 @@ const IndexPage = () => {
       </View>
 
       {/* Month Breakdown */}
-        <View className="breakdown-box p-4 rounded-2xl bg-white shadow">
+        <View className="breakdown-box p-4 rounded-xl bg-white shadow">
           <Text className="section-title text-xl font-semibold mb-2 text-gray-800">按日拆分</Text>
           <View className="space-y-2">
             { getTotalsGroupByDay()?.map(({ date, value }, idx, arr) => (
