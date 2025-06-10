@@ -65,23 +65,28 @@ export default function ExportExcelPage() {
 
   return (
     <View className="export-page p-6 space-y-4 min-h-screen bg-gray-50">
-      <Text className="text-lg font-semibold text-gray-800">选择月份（可多选）</Text>
-      <CheckboxGroup onChange={onCheckChange}>
-        <View style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
-          {months.map((month) => (
-            <Checkbox
-              key={month.id}
-              value={month.id}
-              checked={selectedMonths.includes(month.id)}
-              style={{ marginRight: 8 }}
-            >
-              <Text>{month.name}</Text>
-            </Checkbox>
-          ))}
-        </View>
-      </CheckboxGroup>
+      <View>
+        <Text className="text-lg font-semibold text-gray-800">导出数据为Excel</Text>
+      </View>
 
-      <Text className="text-lg font-semibold text-gray-800">导出数据为Excel</Text>
+      <View>
+        <Text className="text-base font-semibold text-gray-800">选择月份（可多选）</Text>
+        <CheckboxGroup onChange={onCheckChange}>
+          <View style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
+            {months.map((month) => (
+              <Checkbox
+                key={month.id}
+                value={month.id}
+                checked={selectedMonths.includes(month.id)}
+                style={{ marginRight: 8 }}
+              >
+                <Text>{ month.name }</Text>
+              </Checkbox>
+            ))}
+          </View>
+        </CheckboxGroup>
+      </View>
+
       <Button
         className="bg-blue-500 text-white px-4 py-2 m-4 rounded hover:bg-blue-600"
         loading={loading}
