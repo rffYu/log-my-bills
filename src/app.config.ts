@@ -6,6 +6,7 @@ export default defineAppConfig({
     'pages/month/index',
     'pages/user/index',
     'pages/user/login',
+    'pages/user/export',
     'pages/admin/addUser',
     'pages/admin/deleteUser',
   ],
