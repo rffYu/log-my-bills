@@ -4,6 +4,7 @@ import { View, Button, Text } from '@tarojs/components';
 import { useCategoryRecordViewModel } from '@/viewmodels/catRecVM';
 import BarChart from '@/components/D3BarChart';
 import PieChart from '@/components/D3PieChart';
+import CategoryBudget from '@/components/CategoryBudget';
 import GlobalContainer from '@/components/GlobalContainer';
 import './index.scss';
 
@@ -78,6 +79,9 @@ const CategoryPage = () => {
             <Text className="category-total">Total: ￥{ (getTotalByCategory(id))?.total ?? 0 }</Text>
             <View className="category-chart">
               <CatBreakDown catId={ id } idx={ index }/>
+            </View>
+            <View>
+              <CategoryBudget categoryIdx={ id }/>
             </View>
           </View>
         ))}
