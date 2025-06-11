@@ -43,7 +43,7 @@ const BudgetManagerCategory: React.FC = () => {
   };
 
   return (
-    <View style={{ padding: '16px' }}>
+    <View>
       <Text style={{ fontWeight: 'bold', fontSize: 16 }}>分类预算设置</Text>
 
       <Picker
@@ -51,7 +51,7 @@ const BudgetManagerCategory: React.FC = () => {
         range={ categoryList }
         onChange={(e) => setSelectedCategoryIndex(1 + parseInt(e.detail.value))}
       >
-        <View style={{ padding: '8px 0' }}>
+        <View style={{ padding: '8px' }}>
           { selectedCategoryIndex == 0 ? "选择分类" : `当前选择分类：${categoryIdMap[selectedCategoryIndex] || "Unknown"}` }
         </View>
       </Picker>
@@ -125,7 +125,7 @@ const BudgetManagerMonthly: React.FC = () => {
   const percent = budget > 0 ? Math.min(100, Math.round((spent / budget) * 100)) : 0;
 
   return (
-    <View style={{ padding: '16px' }}>
+    <View>
       <Text style={{ fontWeight: 'bold', fontSize: 16 }}>月度预算设置</Text>
 
       <Input
@@ -163,7 +163,7 @@ const BudgetManagerMonthly: React.FC = () => {
 
 const BudgetManagerPage: React.FC = () => {
   return (
-    <View className="budget-manager-page" style={{ padding: "16px", background: "#fafafa" }}>
+    <View className="budget-manager-page" style={{ background: "#fafafa" }}>
       <View className="p-4 m-4 rounded-xl bg-white shadow">
         <BudgetManagerMonthly />
       </View>
