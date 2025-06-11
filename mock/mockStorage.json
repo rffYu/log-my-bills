@@ -1,9 +1,10 @@
 {
-  "token": "mock-token-789",
+  "token": "test-token",
   "userInfo": {
     "role": "admin",
     "nickname": "nickname",
-    "openid": "test-open-id"
+    "openid": "test-open-id",
+    "mainUserId": "test-open-id"
   },
   "monthly-budget": 1000,
   "budgets": [
