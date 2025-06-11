@@ -9,6 +9,7 @@ export default defineAppConfig({
     'pages/user/export',
     'pages/admin/addUser',
     'pages/admin/deleteUser',
+    'pages/admin/report',
     'pages/budget/manage'
   ],
   window: {
