@@ -90,6 +90,13 @@ const UserPage = () => {
 
               <Button
                 className="w-full bg-gray-200 text-black text-base m-2 p-2 rounded-md hover:bg-gray-300"
+                onClick={() => Taro.navigateTo({ url: '/pages/admin/report' })}
+              >
+                查看多用户报表
+              </Button>
+
+              <Button
+                className="w-full bg-gray-200 text-black text-base m-2 p-2 rounded-md hover:bg-gray-300"
                 onClick={() => Taro.navigateTo({ url: '/pages/admin/addUser' })}
               >
                 绑定用户
