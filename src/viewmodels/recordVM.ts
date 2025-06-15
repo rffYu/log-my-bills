@@ -8,12 +8,11 @@ export const useRecordViewModel = () => {
 
   const maxId = () => records.length ? Math.max(...records.map(rec => rec.id)) : -1;
 
-  const createRec = (data: Partial<RecordItem, 'id' | 'date' | 'categoryId' | 'title' | 'type'>) => {
+  const createRec = (data: Pick<Partial<RecordItem>, 'id' | 'date' | 'categoryId' | 'title' | 'type' | 'amount'>) => {
     const d: RecordItem = {
       id: maxId()+1,
-      date: data.date && data.date.trim() !== '' ? data.date : new Date().toLocaleDateString(),
+      date: (data.date && data.date.trim() !== '') ? data.date : new Date().toISOString().slice(0, 10),
       type: data.type ? data.type : -1,
-      currency: data.currency && data.currency.trim() !== '' ? data.currency : 'cny',
       categoryId: data.categoryId ?? 0,
       title: data.title ?? '',
       amount: data.amount ?? 0,
