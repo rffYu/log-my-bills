@@ -87,7 +87,7 @@ const AddRecordDrawer = ({ visible, onClose, onSubmit }: Props) => {
           className="text-white rounded"
           style={{ backgroundColor: '#4169e1' }}
           onClick={() => {
-            onSubmit({ title, amount: Number(amount), categoryId });
+            onSubmit({ title, amount: Number(amount), date, type, categoryId });
             onClose();
           }}>保存</Button>
 
