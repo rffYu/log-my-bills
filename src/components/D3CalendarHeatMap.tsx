@@ -158,14 +158,14 @@ const CalendarHeatmap: React.FC<CalendarHeatmapProps> = ({ month, data, width = 
         type='2d'
         canvasId={canvasId}
         id={canvasId}
-        style={`width: ${width}px; height: ${calculateHeight(month, width)}px; background-color: #f9f9f9;`}
+        style={`width: ${width}px; height: ${calculateHeight(month, width)}px; background-color: #fff;`}
       />
     ) : (
         <canvas
           ref={canvasRef}
           id={canvasId}
           style={{
-            backgroundColor: '#f9f9f9',
+            backgroundColor: '#f7f7f7',
             width: `${width}px`,
             height: `${calculateHeight(month, width)}px`
           }}

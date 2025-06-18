@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, Picker } from '@tarojs/components';
+import { View, Text, Picker } from '@tarojs/components';
 import Taro from '@tarojs/taro';
 import { useDateRecordViewModel } from '@/viewmodels/dtRecVM';
 import CalendarHeatMap from '@/components/D3CalendarHeatMap';
@@ -23,8 +23,8 @@ const MonthlySummaryPage = () => {
   const windowWidth = Taro.getSystemInfoSync().windowWidth ;
 
   return (
-    <ScrollView scrollY className="page-container">
-      <View className="header flex flex-col p-4 rounded-xl bg-white shadow">
+    <View className="page-container">
+      <View className="header flex flex-col m-4 p-4 rounded-xl bg-white shadow">
         <View>
           <Text className="section-title text-xl font-semibold mb-2 text-gray-800">本月总支出</Text>
           <Text className="total-text text-xl font-bold text-rose-500">{ `￥${getTotalByMonth(currentMonth)}` }</Text>
@@ -34,8 +34,8 @@ const MonthlySummaryPage = () => {
         </Picker>
       </View>
 
-      <View className="section">
-        <Text className="section-title">月度支出热力图</Text>
+      <View className="section flex flex-col m-4 p-4 rounded-xl bg-white shadow">
+        <Text className="section-title mb-2 text-xl font-semibold text-gray-800">月度支出热力图</Text>
         <View className="p4 flex justify-center item-center" style={{display: "flex"}}>
           <CalendarHeatMap
             month={currentMonth} data={getTotalsGroupByDayForMonth(currentMonth)} width={ windowWidth - 60 }/>
@@ -43,14 +43,14 @@ const MonthlySummaryPage = () => {
         </View>
       </View>
 
-      <View className="section">
-        <Text className="section-title">每日支出汇总</Text>
+      <View className="section flex flex-col">
+        <Text className="section-title ml-6 m-2 text-xl font-semibold text-gray-800">每日支出汇总</Text>
         {getStatsPerDayForMonth(currentMonth)?.map(({date, count, total}, idx) => (
             <View
-              className="daily-record flex flex-col rounded-xl bg-white p-4 mb-3 shadow-sm"
+              className="daily-record flex flex-col rounded-xl bg-white p-4 mx-4 mb-2 shadow"
               key={idx}
             >
-                <View className="top flex items-center justify-between mb-2">
+                <View className="top flex items-center justify-between">
                   <Text className="text-gray-600 text-sm">{date}</Text>
                   <Text className="amount text-lg font-semibold text-blue-600">￥{total}</Text>
                 </View>
@@ -60,7 +60,7 @@ const MonthlySummaryPage = () => {
       </View>
 
       <GlobalContainer/>
-    </ScrollView>
+    </View>
   );
 }
 
