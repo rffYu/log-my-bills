@@ -26,7 +26,7 @@ export default function LoginPage() {
   };
 
   return (
-    <View className="flex flex-col justify-center items-center h-screen bg-white px-8">
+    <View className="login-page flex flex-col justify-center items-center h-screen px-8">
       <Text className="text-4xl font-bold mb-12 text-gray-800">Hi!</Text>
       <Button
         loading={loading}
