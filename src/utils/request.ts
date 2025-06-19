@@ -2,7 +2,7 @@ import Taro from '@tarojs/taro'
 import { API_HOST } from '@/constants'
 
 // const BASE_URL = 'https://your.api.server.com'; // Replace with your backend URL
-const BASE_URL = API_HOST;
+const BASE_URL = `http://${API_HOST}`;
 
 const request = async (url: string, options: Taro.request.Option = {}) => {
   const token = Taro.getStorageSync('token');
