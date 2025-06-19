@@ -1,6 +1,7 @@
 import Taro from '@tarojs/taro'
 import { useState } from 'react'
 import { View, Button, Text, Checkbox, CheckboxGroup } from '@tarojs/components'
+import { API_HOST } from '@/constants'
 import './export.scss'
 
 const months = [
@@ -21,44 +22,42 @@ const months = [
 export default function ExportExcelPage() {
   const [loading, setLoading] = useState(false)
   const [selectedMonths, setSelectedMonths] = useState<string[]>([]);
+  const token = Taro.getStorageSync('token');
 
   const onCheckChange = (e: any) => {
     setSelectedMonths(e.detail.value);
   };
 
   const handleExport = async () => {
+    if (!token) {
+      Taro.showToast({ title: '请未登录', icon: 'none' })
+      return
+    }
+
     setLoading(true)
     try {
-      const res = await Taro.downloadFile({
-        url: 'https://your-api.com/export/excel', // Replace with your real endpoint
-        success: function (res) {
-          if (res.statusCode === 200) {
-            Taro.saveFile({
-              tempFilePath: res.tempFilePath,
-              success(fileRes) {
-                Taro.openDocument({
-                  filePath: fileRes.savedFilePath,
-                  fileType: 'xlsx',
-                  success: () => {
-                    Taro.showToast({ title: '文件已打开', icon: 'success' })
-                  },
-                })
-              },
-            })
-          } else {
-            Taro.showToast({ title: '下载失败', icon: 'none' })
-          }
-        },
-        fail() {
-          Taro.showToast({ title: '下载出错', icon: 'none' })
-        },
-        complete() {
-          setLoading(false)
-        },
+      const downloadRes = await new Promise<Taro.downloadFile.SuccessCallbackResult>((resolve, reject) => {
+        Taro.downloadFile({
+          url: `http://${API_HOST}/api/export/excel?month=2024-06`, // 或动态参数
+          header: { Authorization: `Bearer ${token}` },
+          success: res => res.statusCode === 200 ? resolve(res) : reject(new Error('下载失败')),
+          fail: reject,
+        })
       })
+
+      const saveRes = await Taro.saveFile({ tempFilePath: downloadRes.tempFilePath })
+
+      await Taro.openDocument({
+        filePath: saveRes.savedFilePath,
+        fileType: 'xlsx',
+      })
+
+      Taro.showToast({ title: '文件已打开', icon: 'success' })
+
     } catch (error) {
       console.error(error)
       Taro.showToast({ title: '导出失败', icon: 'none' })
+    } finally {
       setLoading(false)
     }
   }
