@@ -42,7 +42,7 @@ const UserPage = () => {
           {/* 用户信息卡片 */}
           <View className="box p-6 rounded-2xl bg-white shadow-md flex flex-col items-center space-y-4" style={{ display: "flex" }}>
             <Image
-              src={userInfo.avatar || defaultAvatar}
+              src={userInfo?.avatar || defaultAvatar}
               style={{
                 width: '160px',
                 height: '160px',
@@ -50,9 +50,9 @@ const UserPage = () => {
                 objectFit: 'cover',
               }}
             />
-            <Text className="text-xl font-bold text-gray-800">昵称：{userInfo.nickname}</Text>
-            <Text className="text-sm text-gray-500 break-all">OpenID：{userInfo.openid}</Text>
-            <Text className="text-sm text-gray-600">角色：{userInfo.role}</Text>
+            <Text className="text-xl font-bold text-gray-800">昵称：{userInfo?.nickname}</Text>
+            <Text className="text-sm text-gray-500 break-all">OpenID：{userInfo?.openid}</Text>
+            <Text className="text-sm text-gray-600">角色：{userInfo?.role}</Text>
 
             <Button
               className="w-full bg-gray-200 text-black text-base m-2 p-2 rounded-md hover:bg-gray-300"
@@ -84,7 +84,7 @@ const UserPage = () => {
           </View>
 
           {/* 管理员功能 */}
-          {userInfo.role === 'admin' && (
+          {userInfo?.role === 'admin' && (
             <View className="box p-6 rounded-2xl bg-white shadow-md space-y-4">
               <Text className="text-lg font-semibold text-gray-800">管理员功能</Text>
 
