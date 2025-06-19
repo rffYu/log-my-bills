@@ -14,7 +14,7 @@ export default function LoginPage() {
       const success = await login();
       if (success) {
         Taro.showToast({ title: '登录成功', icon: 'success' });
-        Taro.redirectTo({ url: '/pages/index/index' });
+        Taro.switchTab({ url: '/pages/index/index' });
       } else {
         Taro.showToast({ title: '登录失败', icon: 'none' });
       }

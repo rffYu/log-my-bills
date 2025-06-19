@@ -6,7 +6,7 @@ import defaultAvatar from '@/assets/avatar/default.jpg';
 
 const UserPage = () => {
   const [token, setToken] = useState<string | null>(null);
-  const { userInfo, fetchUserInfo } = useUserInfo()
+  const { userInfo, fetchUserInfo, clearUserInfo } = useUserInfo()
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -27,6 +27,7 @@ const UserPage = () => {
     Taro.removeStorageSync('token');
     Taro.removeStorageSync('userInfo');
     setToken('');
+    clearUserInfo();
     Taro.showToast({ title: '已退出登录', icon: 'none' });
   };
 
@@ -41,7 +42,7 @@ const UserPage = () => {
           {userInfo && (
             <View className="flex flex-col items-center space-y-2" style={ {display: "flex"} }>
               <Image
-                src={ userInfo.avatar || defaultAvatar }
+                src={ userInfo?.avatar || defaultAvatar }
                 style={{
                   width: '80px',
                   height: '80px',
@@ -83,7 +84,7 @@ const UserPage = () => {
             导出数据
           </Button>
 
-          {userInfo.role === 'admin' && (
+          {userInfo?.role === 'admin' && (
             <View className="mt-6 space-y-2">
               <Text className="font-semibold text-gray-700">管理员功能</Text>
               <Button
